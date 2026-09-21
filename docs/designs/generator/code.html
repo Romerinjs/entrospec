@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {"darkMode":"class","theme":{"extend":{"colors":{"surface-variant":"#353534","on-primary-container":"#636565","on-surface-variant":"#c4c7c8","outline-variant":"#444748","primary-fixed-dim":"#c6c6c7","inverse-surface":"#e5e2e1","primary-container":"#e2e2e2","on-error-container":"#ffdad6","tertiary-fixed-dim":"#c8c6c6","surface-container":"#201f1f","error":"#ffb4ab","surface-bright":"#3a3939","secondary":"#c8c6c5","on-tertiary-container":"#656464","on-surface":"#e5e2e1","on-tertiary":"#303030","on-secondary-fixed-variant":"#474746","surface-container-highest":"#353534","on-primary-fixed-variant":"#454747","secondary-fixed":"#e5e2e1","error-container":"#93000a","on-secondary-fixed":"#1b1b1c","on-secondary-container":"#b7b5b4","surface-tint":"#c6c6c7","on-error":"#690005","tertiary-container":"#e4e2e1","primary":"#ffffff","outline":"#8e9192","surface-container-low":"#1c1b1b","on-primary-fixed":"#1a1c1c","on-tertiary-fixed":"#1b1c1c","inverse-on-surface":"#313030","surface-dim":"#131313","background":"#131313","surface-container-high":"#2a2a2a","on-tertiary-fixed-variant":"#474747","secondary-fixed-dim":"#c8c6c5","secondary-container":"#474746","surface-container-lowest":"#0e0e0e","primary-fixed":"#e2e2e2","surface":"#131313","on-primary":"#2f3131","tertiary":"#ffffff","on-background":"#e5e2e1","tertiary-fixed":"#e4e2e1","on-secondary":"#303030","inverse-primary":"#5d5f5f"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xl":"2.5rem","margin-mobile":"1.25rem","gutter-sm":"1rem","gutter":"1.5rem","space-lg":"1.5rem","space-xs":"0.25rem","space-sm":"0.5rem","space-md":"1rem","margin":"2.5rem"},"fontFamily":{"body-lg":["Hanken Grotesk"],"label-md":["Hanken Grotesk"],"body-md":["Hanken Grotesk"],"label-sm":["Hanken Grotesk"],"body-sm":["Hanken Grotesk"],"headline-lg":["Hanken Grotesk"],"headline-sm":["Hanken Grotesk"],"display":["Hanken Grotesk"],"headline-lg-mobile":["Hanken Grotesk"],"display-mobile":["Hanken Grotesk"]},"fontSize":{"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"-0.005em","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"500"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.03em","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0.005em","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"500"}],"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"500"}],"display":["56px",{"lineHeight":"64px","letterSpacing":"-0.03em","fontWeight":"600"}],"headline-lg-mobile":["26px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"500"}],"display-mobile":["38px",{"lineHeight":"44px","letterSpacing":"-0.025em","fontWeight":"600"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 inset-x-0 z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full px-margin-mobile md:px-margin flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-xl"><a class="font-headline-sm text-headline-sm text-primary tracking-tight uppercase select-none" data-path="generator" href="#">STRATUM</a><nav class="hidden sm:flex items-center bg-surface-container-low p-space-xs rounded-full" data-active-classes="bg-surface-container-high text-on-surface font-label-md text-label-md rounded-full"><a aria-current="page" class="px-space-md py-space-xs transition-colors duration-150 bg-surface-container-high text-on-surface font-label-md text-label-md rounded-full" data-path="generator" href="#">Generador</a><a class="px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors duration-150" data-path="banco-de-disenos" href="#">Banco de Diseños</a></nav></div><div class="flex items-center gap-space-lg"><nav class="hidden md:flex items-center gap-space-lg" data-active-classes="text-on-surface"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors duration-150" data-path="documentacion" href="#">Documentación</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors duration-150" data-path="ajustes-del-sistema" href="#">Ajustes</a></nav><div class="flex items-center gap-space-md"><div class="hidden lg:flex flex-col text-right"><span class="font-label-sm text-label-sm text-primary">Workspace 01</span><span class="font-label-sm text-label-sm text-on-surface-variant">Arquitectura</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="w-full pt-16 bg-surface"><div class="flex flex-col w-full">
+<div class="w-full px-margin-mobile md:px-margin py-space-xl flex flex-col gap-space-xl max-w-[1680px] mx-auto">
+<!-- Top Architectural Heading Area -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs max-w-3xl">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Sintetizador Estructural // Versión 4.8</span>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Motor de Aterrizaje y Despliegue de Código</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Formulación algorítmica de arquitecturas web monolíticas. Define restricciones tipográficas, librerías reactivas y compila interfaces de alto impacto sin intermediación manual.
+        </p>
+</div>
+<div class="flex items-center gap-space-md bg-surface-container-low px-space-md py-space-sm rounded-full self-start md:self-auto">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Latencia de Red</span>
+<span class="font-label-sm text-label-sm text-primary font-medium">14ms Edge Global</span>
+</div>
+</div>
+<!-- Panel de Configuración y Parámetros -->
+<div class="bg-surface-container-low rounded-xl p-space-lg md:p-space-xl flex flex-col gap-space-lg shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+<!-- Input Prompt Maestro -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant" for="prompt-input">
+            Parámetros del Nicho y Filosofía de Diseño
+          </label>
+<span class="font-label-sm text-label-sm text-on-surface-variant/60">Entrada multivariante</span>
+</div>
+<div class="relative w-full">
+<textarea class="w-full bg-surface-container rounded-lg p-space-md font-body-md text-body-md text-primary placeholder:text-on-surface-variant/50 focus:bg-surface-container-high transition-colors duration-200 resize-none outline-none" id="prompt-input" placeholder="Define el nicho o propuesta de valor (ej. SaaS analítico B2B para desarrolladores con arquitectura edge, tipografía editorial y gráficos interactivos)..." rows="3">Infraestructura cuántica para microservicios edge orientados a finanzas algorítmicas, composición austera con ritmo editorial y gráficos SVG de dispersión térmica.</textarea>
+</div>
+</div>
+<!-- Fila de Controles: Stack Tecnológico y Gatillo -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg">
+<!-- Stack Tecnológico (Pills tonales) -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
+            Pila de Ejecución Reactiva
+          </span>
+<div class="flex flex-wrap items-center gap-space-xs" id="tech-stack-container">
+<button class="tech-pill px-space-md py-space-xs rounded-full font-label-md text-label-md transition-all duration-150 bg-surface-bright text-primary" data-tech="tailwind" type="button">
+              Tailwind CSS
+            </button>
+<button class="tech-pill px-space-md py-space-xs rounded-full font-label-md text-label-md transition-all duration-150 bg-surface-bright text-primary" data-tech="nextjs" type="button">
+              Next.js 15
+            </button>
+<button class="tech-pill px-space-md py-space-xs rounded-full font-label-md text-label-md transition-all duration-150 bg-surface-container-high text-on-surface-variant hover:text-on-surface" data-tech="framer" type="button">
+              Framer Motion
+            </button>
+<button class="tech-pill px-space-md py-space-xs rounded-full font-label-md text-label-md transition-all duration-150 bg-surface-bright text-primary" data-tech="three" type="button">
+              Three.js
+            </button>
+<button class="tech-pill px-space-md py-space-xs rounded-full font-label-md text-label-md transition-all duration-150 bg-surface-container-high text-on-surface-variant hover:text-on-surface" data-tech="astro" type="button">
+              Astro 4
+            </button>
+<button class="tech-pill px-space-md py-space-xs rounded-full font-label-md text-label-md transition-all duration-150 bg-surface-container-high text-on-surface-variant hover:text-on-surface" data-tech="vue" type="button">
+              Vue 3
+            </button>
+</div>
+</div>
+<!-- Botón de Ejecución Primario -->
+<div class="flex items-center gap-space-md self-end lg:self-center">
+<button class="bg-primary hover:bg-inverse-surface active:scale-[0.98] text-on-primary font-label-md text-label-md px-space-lg py-space-md rounded-lg transition-all duration-150 shadow-[0_8px_24px_-4px_rgba(0,0,0,0.5)] flex items-center gap-space-sm" id="btn-generate" type="button">
+<span>Compilar Estructura</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Área de Trabajo Dividida (Split View) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- Columna Izquierda: Prompt Maestro y Especificación Estructural (5 cols) -->
+<div class="xl:col-span-5 flex flex-col gap-space-md">
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-lg shadow-[0_8px_32px_rgba(0,0,0,0.45)]">
+<!-- Encabezado de Especificación -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Manifiesto Activo</span>
+<span class="font-headline-sm text-headline-sm text-primary">Master System Prompt</span>
+</div>
+<div class="bg-surface-container-high px-space-sm py-space-xs rounded font-label-sm text-label-sm text-on-surface">
+              ID: STRATUM-7704
+            </div>
+</div>
+<!-- Prompt Detallado Visualizador Tonal -->
+<div class="flex flex-col gap-space-md bg-surface-container-lowest p-space-md rounded-lg font-body-sm text-body-sm text-on-surface select-text overflow-y-auto max-h-[580px]">
+<!-- Segmento 1: Cadena Semilla -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-semibold">01 // Cadena Semilla &amp; Contexto Operativo</span>
+<p class="text-on-surface-variant">
+                Genera una interfaz de aterrizaje hiper-precisa para la red neuronal "Axiom Edge Compute". La propuesta central es liquidar operaciones de micro-segundos mediante infraestructura colocada en satélites LEO sin fricción de nodo central.
+              </p>
+</div>
+<!-- Segmento 2: Directrices Visuales y Estilo -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-semibold">02 // Directrices Visuales &amp; Arquitectura Editorial</span>
+<div class="space-y-space-xs text-on-surface-variant">
+<p>• <strong class="text-on-surface">Paleta:</strong> Tonalidades de carbono profundo (#0A0A0A, #141414, #1E1E1E) con blanco titanio óptico (#F4F4F4) reservado estrictamente para acentos funcionales.</p>
+<p>• <strong class="text-on-surface">Sin Líneas:</strong> Baneo total de bordes, recuadros con trazo y líneas de división horizontal. Delimitación espacial pura por luminancia de fondo y amortiguación de sombras de muy baja frecuencia.</p>
+<p>• <strong class="text-on-surface">Tipografía:</strong> Hanken Grotesk en proporciones monumentales (Display 56px para titulares secos, Body 14px espaciado con tracking negativo controlado).</p>
+<p>• <strong class="text-on-surface">Iconografía:</strong> Reducción al absurdo: ningún icono meramente ilustrativo. Solo símbolos que codifican acciones mecánicas directas.</p>
+</div>
+</div>
+<!-- Segmento 3: Restricciones de Rendimiento y Código -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-semibold">03 // Restricciones de Compilación</span>
+<div class="space-y-space-xs text-on-surface-variant">
+<p>• Cero dependencias externas no declaradas en runtime.</p>
+<p>• Presupuesto de Javascript en primer pantallazo: &lt; 18kB gzip.</p>
+<p>• Accesibilidad WCAG 2.1 AAA para todas las jerarquías de lectura sobre fondos oscuros continuos.</p>
+</div>
+</div>
+<!-- Segmento 4: Tokenización Activa -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-semibold">04 // Bloques Estructurales Solicitados</span>
+<p class="text-on-surface-variant">
+                1. Hero Monolítico con ticker analítico estático.<br/>
+                2. Matriz Asimétrica Bento de capacidades matemáticas.<br/>
+                3. Sección de visualización de throughput en tiempo de ejecución.<br/>
+                4. Terminal interactiva de clonación de repositorio.
+              </p>
+</div>
+</div>
+<!-- Barra de Acciones de Prompt -->
+<div class="flex items-center justify-between gap-space-md pt-space-xs">
+<button class="flex items-center gap-space-sm bg-surface-container px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container-high transition-colors duration-150" id="btn-copy-prompt" type="button">
+<span class="material-symbols-outlined text-[16px]" id="copy-icon">content_copy</span>
+<span id="copy-label">Copiar Prompt Maestro</span>
+</button>
+<button class="flex items-center gap-space-sm bg-surface-bright px-space-md py-space-sm rounded-lg font-label-md text-label-md text-primary hover:bg-surface-variant transition-colors duration-150" type="button">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+<span>Ejecutar en vivo</span>
+</button>
+</div>
+</div>
+<!-- Tarjeta de Metadatos de Compilación -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex items-center justify-between text-on-surface-variant">
+<div class="flex items-center gap-space-md">
+<span class="font-label-sm text-label-sm uppercase text-on-surface">Tokens Estimados: 1,482</span>
+<span class="font-label-sm text-label-sm">|</span>
+<span class="font-label-sm text-label-sm">Tiempo de Proceso: 2.3s</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface">Estabilidad: 99.8%</span>
+</div>
+</div>
+<!-- Columna Derecha: Render / Vista Previa Interactiva (7 cols) -->
+<div class="xl:col-span-7 flex flex-col gap-space-md">
+<!-- Header de la Vista Previa con Switcher de Viewport -->
+<div class="bg-surface-container-low rounded-xl px-space-lg py-space-md flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Lienzo Activo</span>
+<span class="font-label-md text-label-md text-primary">Simulación Visual de Producción</span>
+</div>
+<!-- Switcher de Viewport -->
+<div class="bg-surface-container rounded-full p-space-xs flex items-center gap-space-xs">
+<button class="px-space-md py-space-xs rounded-full font-label-sm text-label-sm bg-surface-bright text-primary transition-all duration-150 flex items-center gap-space-xs" id="view-desktop-btn" type="button">
+<span class="material-symbols-outlined text-[14px]">desktop_windows</span>
+<span>Desktop (1440px)</span>
+</button>
+<button class="px-space-md py-space-xs rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-all duration-150 flex items-center gap-space-xs" id="view-mobile-btn" type="button">
+<span class="material-symbols-outlined text-[14px]">smartphone</span>
+<span>Móvil (390px)</span>
+</button>
+</div>
+</div>
+<!-- Contenedor del Preview Sandbox -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md min-h-[720px] flex items-center justify-center overflow-hidden transition-all duration-300">
+<!-- Mockup Frame -->
+<div class="w-full max-w-full bg-surface rounded-lg transition-all duration-300 overflow-hidden shadow-[0_24px_64px_-12px_rgba(0,0,0,0.85)] flex flex-col" id="preview-viewport">
+<!-- Barra Superior del Navegador Simulado -->
+<div class="w-full bg-surface-container-low px-space-md py-space-xs flex items-center justify-between select-none">
+<div class="flex items-center gap-space-xs">
+<div class="w-2.5 h-2.5 rounded-full bg-surface-container-highest"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-surface-container-highest"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-surface-container-highest"></div>
+</div>
+<div class="bg-surface-container px-space-md py-0.5 rounded text-[11px] text-on-surface-variant font-mono">
+                axiom-edge.network/cluster/zero
+              </div>
+<div class="text-[11px] text-on-surface-variant font-mono">200 OK</div>
+</div>
+<!-- CONTENIDO SIMULADO DE LA LANDING (HERO + CARDS + METRICS) -->
+<div class="w-full bg-surface text-on-surface flex flex-col p-space-md md:p-space-xl gap-space-xl">
+<!-- Mini Sub-Header de la Landing Simulada -->
+<div class="flex items-center justify-between">
+<div class="font-headline-sm text-headline-sm text-primary tracking-tighter uppercase font-semibold">
+                  AXIOM//0
+                </div>
+<div class="hidden sm:flex items-center gap-space-lg text-on-surface-variant font-label-md text-label-md">
+<span>Núcleo</span>
+<span>Rendimiento</span>
+<span>Malla Global</span>
+</div>
+<button class="bg-surface-container-high text-primary px-space-md py-space-xs rounded font-label-md text-label-md" type="button">
+                  Conectar CLI
+                </button>
+</div>
+<!-- Hero Section de la Landing -->
+<div class="flex flex-col gap-space-md pt-space-md">
+<div class="flex items-center gap-space-xs self-start bg-surface-container-low px-space-md py-space-xs rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface">Malla Activa // Región US-East-Zero</span>
+</div>
+<h2 class="font-display text-display tracking-tight text-primary max-w-2xl leading-none">
+                  Computación Determinista a Nivel Orbital.
+                </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                  Resuelve micro-transacciones financieras en 0.8 milisegundos. Sin capas de virtualización, sin intermediación de centro de datos terrestre.
+                </p>
+<div class="flex flex-wrap items-center gap-space-md pt-space-xs">
+<button class="bg-primary hover:bg-inverse-surface text-on-primary font-label-md text-label-md px-space-lg py-space-md rounded" type="button">
+                    Desplegar Nodo Autónomo
+                  </button>
+<button class="bg-surface-container-high text-on-surface font-label-md text-label-md px-space-lg py-space-md rounded" type="button">
+                    Especificación Whitepaper
+                  </button>
+</div>
+</div>
+<!-- Visualización Gráfica Interactiva & Bento Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md pt-space-sm">
+<!-- Bento Card 1: Throughput Data Metric con SVG Chart -->
+<div class="bg-surface-container-low rounded-lg p-space-md flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Rendimiento en Vivo</span>
+<span class="font-headline-lg text-headline-lg text-primary tracking-tight">4.82 Mops/s</span>
+</div>
+<!-- SVG Sparkline Chart -->
+<div class="w-full h-16 flex items-end">
+<svg class="w-full h-12 text-primary" fill="none" preserveaspectratio="none" viewbox="0 0 200 40">
+<path d="M0 32 L30 28 L60 35 L90 14 L120 22 L150 6 L180 18 L200 2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M0 32 L30 28 L60 35 L90 14 L120 22 L150 6 L180 18 L200 2 L200 40 L0 40 Z" fill="currentColor" fill-opacity="0.08"></path>
+</svg>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sin colas de procesamiento</span>
+</div>
+<!-- Bento Card 2: Visual Card Mockup con Imagen Contextual -->
+<div class="bg-surface-container-low rounded-lg overflow-hidden flex flex-col">
+<div class="h-28 w-full bg-cover bg-center" data-alt="Monolithic architectural quantum server rack in an austere black subterranean vault, deep charcoal matte concrete, subtle volumetric lighting, editorial composition, hyper-detailed, no extraneous lights" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCV4niLz9G2lN8IIv5ldNZqCe6hCMLCRzgoM-zscSU16PtPLm8eIojwfPinVvGJGNYoPWe83JxFJOcSa9CEAzlqKr9Yb8TBei1uRrjtzsf4GYuC2QvyXRdNVBdxfJddYxsvsTK3tiZeTNaJzeth9_6WFUkQ297k2Cw8WIbQ7DCFSX499uyw7Yaq-sDmdxsHey963fgmyPcUML44G2bQ6X-LrP3M-rifWzI3R4z1-T8hmulghWQrJSEP')"></div>
+<div class="p-space-md flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Topología Subterránea</span>
+<span class="font-body-md text-body-md text-on-surface font-medium">Bóveda Criptográfica Zero-01</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Verificación cuántica aislada sin puente de red.</span>
+</div>
+</div>
+<!-- Bento Card 3: Anillo de Eficiencia y Latencia -->
+<div class="bg-surface-container-low rounded-lg p-space-md flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Consumo Térmico</span>
+<span class="font-headline-lg text-headline-lg text-primary">0.14 W</span>
+</div>
+<!-- Inline SVG Gauge -->
+<div class="w-12 h-12 relative flex items-center justify-center">
+<svg class="w-12 h-12 transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-high" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="88, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<span class="absolute font-label-sm text-[10px] text-primary">88%</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs pt-space-sm">
+<div class="w-full bg-surface-container-high h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[88%]"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Disipación criogénica pasiva</span>
+</div>
+</div>
+</div>
+<!-- Terminal Strip Callout Simulado -->
+<div class="bg-surface-container-low rounded-lg p-space-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md font-mono text-[13px]">
+<span class="text-on-surface-variant">$</span>
+<span class="text-primary">curl -sSfL https://axiom.network/install | sh</span>
+</div>
+<button class="bg-surface-bright text-primary px-space-md py-space-xs rounded text-[12px] font-medium self-end sm:self-auto hover:bg-surface-variant transition-colors" type="button">
+                  Copiar comando
+                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Barra de Especificaciones y Métricas de Auditoría Inferior -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-md pt-space-md">
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Pureza DOM</span>
+<span class="font-headline-sm text-headline-sm text-primary font-medium">100% Sin Bordes</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Luminancia mate y separación tonal</span>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Contraste WCAG</span>
+<span class="font-headline-sm text-headline-sm text-primary font-medium">17.8 : 1</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Cumplimiento estricto AAA</span>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Renderizado CSS</span>
+<span class="font-headline-sm text-headline-sm text-primary font-medium">0ms Layout Shifts</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Reservas dimensionales rígidas</span>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Motor Tipográfico</span>
+<span class="font-headline-sm text-headline-sm text-primary font-medium">Hanken Grotesk</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Escalamiento óptico matemático</span>
+</div>
+</div>
+</div>
+<script>
+    (function () {
+      // 1. Manejo de Selección de Stack Tecnológico (Tonal Pills)
+      const pills = document.querySelectorAll('.tech-pill');
+      pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          const isActive = pill.classList.contains('bg-surface-bright');
+          if (isActive) {
+            pill.classList.remove('bg-surface-bright', 'text-primary');
+            pill.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+          } else {
+            pill.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+            pill.classList.add('bg-surface-bright', 'text-primary');
+          }
+        });
+      });
+
+      // 2. Viewport Switcher (Desktop 1440px vs Móvil 390px)
+      const desktopBtn = document.getElementById('view-desktop-btn');
+      const mobileBtn = document.getElementById('view-mobile-btn');
+      const previewViewport = document.getElementById('preview-viewport');
+
+      function setDesktop() {
+        desktopBtn.classList.remove('text-on-surface-variant');
+        desktopBtn.classList.add('bg-surface-bright', 'text-primary');
+        mobileBtn.classList.remove('bg-surface-bright', 'text-primary');
+        mobileBtn.classList.add('text-on-surface-variant');
+
+        previewViewport.style.maxWidth = '100%';
+      }
+
+      function setMobile() {
+        mobileBtn.classList.remove('text-on-surface-variant');
+        mobileBtn.classList.add('bg-surface-bright', 'text-primary');
+        desktopBtn.classList.remove('bg-surface-bright', 'text-primary');
+        desktopBtn.classList.add('text-on-surface-variant');
+
+        previewViewport.style.maxWidth = '390px';
+      }
+
+      desktopBtn.addEventListener('click', setDesktop);
+      mobileBtn.addEventListener('click', setMobile);
+
+      // 3. Botón de Copiado con feedback de interacción sutil
+      const copyBtn = document.getElementById('btn-copy-prompt');
+      const copyLabel = document.getElementById('copy-label');
+      const copyIcon = document.getElementById('copy-icon');
+
+      copyBtn.addEventListener('click', () => {
+        const textToCopy = `STRATUM MASTER PROMPT // ARCHITECTURAL SYNTHESIZER
+Infraestructura cuántica para microservicios edge orientados a finanzas algorítmicas, composición austera con ritmo editorial y gráficos SVG de dispersión térmica.
+Reglas: Sin bordes, fondos en negro carbón (#0A0A0A/#141414), tipografía Hanken Grotesk, cero indicadores decorativos.`;
+
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          copyLabel.textContent = 'Copiado al Portapapeles';
+          copyIcon.textContent = 'check';
+          copyBtn.classList.add('bg-surface-bright', 'text-primary');
+
+          setTimeout(() => {
+            copyLabel.textContent = 'Copiar Prompt Maestro';
+            copyIcon.textContent = 'content_copy';
+            copyBtn.classList.remove('bg-surface-bright', 'text-primary');
+          }, 2200);
+        });
+      });
+
+      // 4. Botón Generar (Feedback táctil tonal)
+      const generateBtn = document.getElementById('btn-generate');
+      generateBtn.addEventListener('click', () => {
+        const originalText = generateBtn.innerHTML;
+        generateBtn.innerHTML = `
+          <span class="material-symbols-outlined text-[16px] animate-spin">refresh</span>
+          <span>Sintetizando Malla...</span>
+        `;
+        generateBtn.disabled = true;
+
+        setTimeout(() => {
+          generateBtn.innerHTML = originalText;
+          generateBtn.disabled = false;
+        }, 1200);
+      });
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest mt-space-xl py-space-xl"><div class="w-full px-margin-mobile md:px-margin flex flex-col md:flex-row items-start md:items-center justify-between gap-space-lg"><div class="flex flex-col gap-space-xs"><span class="font-label-md text-label-md uppercase tracking-wider text-primary">Stratum Execution Engine</span><span class="font-body-sm text-body-sm text-on-surface-variant">Sistemas de aterrizaje de alto rendimiento, composición arquitectónica y archivo maestro.</span></div><div class="flex flex-wrap items-center gap-space-lg"><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors duration-150" href="#">Especificaciones</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors duration-150" href="#">API</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors duration-150" href="#">Protocolos</a><span class="font-label-sm text-label-sm text-on-surface-variant">© 2025 STRATUM</span></div></div></footer></body></html>

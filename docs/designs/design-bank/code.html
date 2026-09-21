@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {"darkMode":"class","theme":{"extend":{"colors":{"surface-variant":"#353534","on-primary-container":"#636565","on-surface-variant":"#c4c7c8","outline-variant":"#444748","primary-fixed-dim":"#c6c6c7","inverse-surface":"#e5e2e1","primary-container":"#e2e2e2","on-error-container":"#ffdad6","tertiary-fixed-dim":"#c8c6c6","surface-container":"#201f1f","error":"#ffb4ab","surface-bright":"#3a3939","secondary":"#c8c6c5","on-tertiary-container":"#656464","on-surface":"#e5e2e1","on-tertiary":"#303030","on-secondary-fixed-variant":"#474746","surface-container-highest":"#353534","on-primary-fixed-variant":"#454747","secondary-fixed":"#e5e2e1","error-container":"#93000a","on-secondary-fixed":"#1b1b1c","on-secondary-container":"#b7b5b4","surface-tint":"#c6c6c7","on-error":"#690005","tertiary-container":"#e4e2e1","primary":"#ffffff","outline":"#8e9192","surface-container-low":"#1c1b1b","on-primary-fixed":"#1a1c1c","on-tertiary-fixed":"#1b1c1c","inverse-on-surface":"#313030","surface-dim":"#131313","background":"#131313","surface-container-high":"#2a2a2a","on-tertiary-fixed-variant":"#474747","secondary-fixed-dim":"#c8c6c5","secondary-container":"#474746","surface-container-lowest":"#0e0e0e","primary-fixed":"#e2e2e2","surface":"#131313","on-primary":"#2f3131","tertiary":"#ffffff","on-background":"#e5e2e1","tertiary-fixed":"#e4e2e1","on-secondary":"#303030","inverse-primary":"#5d5f5f"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xl":"2.5rem","margin-mobile":"1.25rem","gutter-sm":"1rem","gutter":"1.5rem","space-lg":"1.5rem","space-xs":"0.25rem","space-sm":"0.5rem","space-md":"1rem","margin":"2.5rem"},"fontFamily":{"body-lg":["Hanken Grotesk"],"label-md":["Hanken Grotesk"],"body-md":["Hanken Grotesk"],"label-sm":["Hanken Grotesk"],"body-sm":["Hanken Grotesk"],"headline-lg":["Hanken Grotesk"],"headline-sm":["Hanken Grotesk"],"display":["Hanken Grotesk"],"headline-lg-mobile":["Hanken Grotesk"],"display-mobile":["Hanken Grotesk"]},"fontSize":{"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"-0.005em","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"500"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.03em","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0.005em","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"500"}],"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"500"}],"display":["56px",{"lineHeight":"64px","letterSpacing":"-0.03em","fontWeight":"600"}],"headline-lg-mobile":["26px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"500"}],"display-mobile":["38px",{"lineHeight":"44px","letterSpacing":"-0.025em","fontWeight":"600"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 inset-x-0 z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full px-margin-mobile md:px-margin flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-xl"><a class="font-headline-sm text-headline-sm text-primary tracking-tight uppercase select-none" data-path="generator" href="#">STRATUM</a><nav class="hidden sm:flex items-center bg-surface-container-low p-space-xs rounded-full" data-active-classes="bg-surface-container-high text-on-surface font-label-md text-label-md rounded-full"><a class="px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors duration-150" data-path="generator" href="#">Generador</a><a class="px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors duration-150" data-path="banco-de-disenos" href="#">Banco de Diseños</a></nav></div><div class="flex items-center gap-space-lg"><nav class="hidden md:flex items-center gap-space-lg" data-active-classes="text-on-surface"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors duration-150" data-path="documentacion" href="#">Documentación</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors duration-150" data-path="ajustes-del-sistema" href="#">Ajustes</a></nav><div class="flex items-center gap-space-md"><div class="hidden lg:flex flex-col text-right"><span class="font-label-sm text-label-sm text-primary">Workspace 01</span><span class="font-label-sm text-label-sm text-on-surface-variant">Arquitectura</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="w-full pt-16 bg-surface"><div class="flex flex-col w-full">
+<section class="w-full px-margin-mobile md:px-margin pt-space-lg pb-space-xl">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs max-w-3xl">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Catálogo de Alta Densidad</span>
+<span class="text-on-surface-variant/40">/</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Archivos Maestros Verificados</span>
+</div>
+<h1 class="font-display text-display text-primary tracking-tight">Banco de Diseños</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+          Repositorio arquitectónico de estructuras de aterrizaje ejecutadas con precisión editorial, contraste puro y fundamentos tipográficos calibrados para conversión institucional.
+        </p>
+</div>
+<div class="flex items-center gap-space-md self-start md:self-auto">
+<div class="bg-surface-container-low px-space-md py-space-sm rounded-lg flex items-center gap-space-sm">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider">Indexados</span>
+<span class="font-label-md text-label-md text-primary font-semibold">148 Módulos</span>
+</div>
+<div class="bg-surface-container-low px-space-md py-space-sm rounded-lg flex items-center gap-space-sm">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider">Versión</span>
+<span class="font-label-md text-label-md text-primary font-semibold">v4.12</span>
+</div>
+</div>
+</div>
+<div class="mt-space-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex flex-wrap items-center gap-space-xs bg-surface-container-low p-space-xs rounded-full" id="filter-container">
+<button class="filter-btn px-space-md py-space-xs rounded-full font-label-md text-label-md bg-surface-container-high text-primary transition-all duration-150" data-filter="all">Todos</button>
+<button class="filter-btn px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all duration-150" data-filter="saas">SaaS B2B</button>
+<button class="filter-btn px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all duration-150" data-filter="ecommerce">E-commerce Editorial</button>
+<button class="filter-btn px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all duration-150" data-filter="devtools">Developer Tools</button>
+<button class="filter-btn px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all duration-150" data-filter="agencies">Agencias Creativas</button>
+<button class="filter-btn px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all duration-150" data-filter="fintech">Fintech</button>
+</div>
+<div class="flex items-center gap-space-sm w-full md:w-auto">
+<div class="relative w-full md:w-72">
+<input class="w-full bg-surface-container-low text-primary placeholder:text-on-surface-variant/60 font-body-sm text-body-sm px-space-md py-space-sm rounded-lg focus:bg-surface-container transition-colors duration-150" id="search-input" placeholder="Filtrar por arquitectura o prompt..." type="text"/>
+</div>
+</div>
+</div>
+</section>
+<section class="w-full px-margin-mobile md:px-margin pb-space-xl">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-gutter items-start" id="gallery-grid">
+<article class="gallery-card lg:col-span-8 group flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container transition-colors duration-200 shadow-[0_8px_24px_-4px_rgba(0,0,0,0.45)]" data-category="saas" data-tags="observability cloud telemetria saas b2b">
+<div class="relative w-full aspect-[16/9] bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.01]" data-alt="Monolithic dark mode user interface preview of a cloud telemetry dashboard with dark grey cards, high contrast typographic data readouts, minimal sparklines rendered in stark white over obsidian background, strictly no borders, editorial layout composition" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZcDePpTtcUu_cAAlW2H7Z6SbSa3P3v5Qm0wgBEYoKMB1Ntt5t59youGXbT4rlZROFuIQCmzd_GqM6s416cVn2sBmCbhsZ4g50Psqap1nSwdKR-Zx2_hbv1ps-mpw6CgGR0sRTdeTzzRX4Jol8lOwAsNU3dkQBhhSpz5IQTCL1fka78Il4LasLzK3fHJ_LEv_WoCshnMONe94Di5LlfeMtYDtFwy--SfT5mRbOa2iH_dh_VA3fEAjF"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent opacity-80"></div>
+<div class="absolute top-space-md left-space-md flex items-center gap-space-xs">
+<span class="bg-surface-container-lowest/90 backdrop-blur-md px-space-sm py-space-xs rounded font-label-sm text-label-sm text-primary tracking-wider uppercase">01 // B2B Core</span>
+<span class="bg-surface-container-lowest/90 backdrop-blur-md px-space-sm py-space-xs rounded font-label-sm text-label-sm text-on-surface-variant">Luminancia 0.08</span>
+</div>
+</div>
+<div class="p-space-lg flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">Kroma // Observability Cloud</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Arquitectura monolítica orientada a telemetría distribuida para clústeres heterogéneos.</p>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant shrink-0">Next.js • Tailwind • Three.js</span>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-space-sm">
+<button class="bg-surface-container-high hover:bg-surface-variant text-primary px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-colors duration-150 flex items-center gap-space-xs" onclick="openDrawer('kroma')">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+<span>Inspeccionar Prompt</span>
+</button>
+<button class="bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-colors duration-150" onclick="previewDesign('Kroma // Observability Cloud')">
+                Vista Previa
+              </button>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-on-primary px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-all duration-150 flex items-center gap-space-xs" onclick="loadIntoGenerator('kroma', this)">
+<span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+<span>Cargar en Generador</span>
+</button>
+</div>
+</div>
+</article>
+<article class="gallery-card lg:col-span-4 group flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container transition-colors duration-200 shadow-[0_8px_24px_-4px_rgba(0,0,0,0.45)]" data-category="fintech" data-tags="fintech core ledger financiero monolith">
+<div class="relative w-full aspect-[4/3] bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.01]" data-alt="Brutalist financial core desktop landing page preview showing dense micro-typography data streams, monolithic charcoal slabs, deep slate background with ultra-clean white figures and balance summaries, total rejection of border lines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABgQMVpuVcaLrvcPn-17CBN0DZ_Duc6i2feFGOITfd6iF-WZIWF96LBAFIjd6dixhqPOgv6dSD6cRM_qHNR9LpzIWnXYt4QWmi2fXrq9axRFKtefN89hS38BFyEhF2sKhvlwJFnF4HnICPuB2X8HxuIlYdwSRIVw3cjNLFK2SR1C6xu81cygbs2lvea0_BGyECfbEzQ5RFRc4W7nJemCDKC17_fhwXPNxBpgeg8JRWbpu64_2QEq_D"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent opacity-80"></div>
+<div class="absolute top-space-md left-space-md">
+<span class="bg-surface-container-lowest/90 backdrop-blur-md px-space-sm py-space-xs rounded font-label-sm text-label-sm text-primary tracking-wider uppercase">02 // Ledger</span>
+</div>
+</div>
+<div class="p-space-lg flex flex-col gap-space-md">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">Monolith // High-Frequency Core</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Estructura austera de transacciones institucionales y liquidación atómica en tiempo real.</p>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Rust WASM • SvelteKit • WebGPU</div>
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<button class="w-full bg-primary hover:bg-primary/90 text-on-primary px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-all duration-150 flex items-center justify-center gap-space-xs" onclick="loadIntoGenerator('monolith', this)">
+<span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+<span>Cargar en Generador</span>
+</button>
+<div class="grid grid-cols-2 gap-space-xs">
+<button class="bg-surface-container-high hover:bg-surface-variant text-on-surface px-space-sm py-space-xs rounded-lg font-label-md text-label-md transition-colors duration-150 text-center" onclick="openDrawer('monolith')">
+                Prompt Maestro
+              </button>
+<button class="bg-surface-container hover:bg-surface-container-high text-on-surface px-space-sm py-space-xs rounded-lg font-label-md text-label-md transition-colors duration-150 text-center" onclick="previewDesign('Monolith // High-Frequency Core')">
+                Previsualizar
+              </button>
+</div>
+</div>
+</div>
+</article>
+<article class="gallery-card lg:col-span-5 group flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container transition-colors duration-200 shadow-[0_8px_24px_-4px_rgba(0,0,0,0.45)]" data-category="devtools" data-tags="devtools spatial sdk visual engine aura">
+<div class="relative w-full aspect-[4/3] bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.01]" data-alt="Developer tools landing screen showcase displaying deep grey code compilation windows, spatial coordinate visualizers with wireframe nodes in pure white, editorial asymmetric layout with wide margins and zero borders" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASUupDst5QfHxLhraEiSJBo6dugGjryOT-OgEux4ok-ZErfJfTVZwfEDlh4SKNx4KRl2rW9yrwmHi0lSCl7MhkbwJAiVUzHek3WnQ-iuKigvvX6VVM2omlS0iQttcXkLAiPkMojs-CUIgNpTtVIlo6AHyNezPSrqbhNZVFHo8gfpEZm7Dzwf6w2kKxEF7bNUeVVp28nZO8mTBovtaVwQ2dP5_IRC-p6OHg5nz7Ert2Jihvu8rrNVZ_"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent opacity-80"></div>
+<div class="absolute top-space-md left-space-md">
+<span class="bg-surface-container-lowest/90 backdrop-blur-md px-space-sm py-space-xs rounded font-label-sm text-label-sm text-primary tracking-wider uppercase">03 // Spatial</span>
+</div>
+</div>
+<div class="p-space-lg flex flex-col gap-space-md">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">Aura // Spatial Computing SDK</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Canvas editorial para documentación de compiladores y pipeline de renderizado volumétrico.</p>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Vite • WebGL2 • Tailwind</div>
+<div class="flex items-center justify-between pt-space-xs">
+<button class="bg-surface-container-high hover:bg-surface-variant text-on-surface px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-colors duration-150" onclick="openDrawer('aura')">
+              Ver Parámetros
+            </button>
+<button class="bg-primary hover:bg-primary/90 text-on-primary px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-all duration-150 flex items-center gap-space-xs" onclick="loadIntoGenerator('aura', this)">
+<span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+<span>Cargar</span>
+</button>
+</div>
+</div>
+</article>
+<article class="gallery-card lg:col-span-7 group flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container transition-colors duration-200 shadow-[0_8px_24px_-4px_rgba(0,0,0,0.45)]" data-category="ecommerce" data-tags="ecommerce editorial moda producto physical atelier">
+<div class="relative w-full aspect-[16/9] bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.01]" data-alt="High-end luxury editorial physical product landing page with dramatic monochrome lighting, heavy use of stark whitespace and charcoal tones, massive headline typography in Hanken Grotesk paired with delicate micro metadata" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDKhd2TfwyyYHhz_ByJJjwdCvNBQ-jY_joqeiRTS1LHqF7WS0c3p25fkd_i_dpovcc-cxGL9yqnK_2jvlpyGbKn1NPI0weMkZ4dEIu3qccgYlZ42PtSJXb7euottjL_I-VDFpcxA45PFz49XtN1ZvELZwknqqniye5I7hD73vpGWfJCP2AKRsQqXY0toudd2U8P5jsN2HX4iUfONfhHN0-PjGVPVsWaH22JiTX9CtBoyHQ6qiC5pzP"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent opacity-80"></div>
+<div class="absolute top-space-md left-space-md">
+<span class="bg-surface-container-lowest/90 backdrop-blur-md px-space-sm py-space-xs rounded font-label-sm text-label-sm text-primary tracking-wider uppercase">04 // Editorial Commerce</span>
+</div>
+</div>
+<div class="p-space-lg flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">Atelier // Horology &amp; Materials</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Arquitectura de vitrina asimétrica para manufactura de titanio y componentes de alta precisión.</p>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant shrink-0">Remix • Shopify Headless • Lenis</span>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-space-sm">
+<button class="bg-surface-container-high hover:bg-surface-variant text-primary px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-colors duration-150 flex items-center gap-space-xs" onclick="openDrawer('atelier')">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+<span>Master Prompt</span>
+</button>
+<button class="bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-colors duration-150" onclick="previewDesign('Atelier // Horology &amp; Materials')">
+                Vista Previa
+              </button>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-on-primary px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-all duration-150 flex items-center gap-space-xs" onclick="loadIntoGenerator('atelier', this)">
+<span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+<span>Cargar en Generador</span>
+</button>
+</div>
+</div>
+</article>
+<article class="gallery-card lg:col-span-6 group flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container transition-colors duration-200 shadow-[0_8px_24px_-4px_rgba(0,0,0,0.45)]" data-category="agencies" data-tags="agencias creativas estudio diseno editorial vektor">
+<div class="relative w-full aspect-[16/10] bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.01]" data-alt="Monolithic design studio landing page layout featuring extreme scale typography, brutalist grid composition, subtle dark grey tone blocks and clean editorial showcase of architectural blueprints" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyYNljFhob4SLHfoBg0BmOsExg5VAs19Z3KobkImSq2IBGIZddvSXquog3oP6lQo_1PVVPlYHgtx_K7A1Qq68xOLKOmOgzmRge_XUKtN9ziubWJDucKL8C592BK8_VgApWgjPF97UJEppLKFthdFMQmzO0NAuG_AMKJlnhOUnkha-IjPdjfMplk_DTh0p_FlOODhJp5Y0WqQs0TbYidzrU6Jxsg3_lvHImBaHsGq3p327XIcT3pVfn"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent opacity-80"></div>
+<div class="absolute top-space-md left-space-md">
+<span class="bg-surface-container-lowest/90 backdrop-blur-md px-space-sm py-space-xs rounded font-label-sm text-label-sm text-primary tracking-wider uppercase">05 // Architecture Studio</span>
+</div>
+</div>
+<div class="p-space-lg flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">Vektor // Design Engineering Suite</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Espacio curatorial para estudios multidisciplinares de identidad de sistemas y hardware industrial.</p>
+</div>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Astro • Motion Canvas • Tailwind</div>
+<div class="flex items-center justify-between pt-space-xs">
+<button class="bg-surface-container-high hover:bg-surface-variant text-on-surface px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-colors duration-150" onclick="openDrawer('vektor')">
+              Prompt &amp; Estructura
+            </button>
+<button class="bg-primary hover:bg-primary/90 text-on-primary px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-all duration-150 flex items-center gap-space-xs" onclick="loadIntoGenerator('vektor', this)">
+<span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+<span>Cargar</span>
+</button>
+</div>
+</div>
+</article>
+<article class="gallery-card lg:col-span-6 group flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container transition-colors duration-200 shadow-[0_8px_24px_-4px_rgba(0,0,0,0.45)]" data-category="saas" data-tags="saas developer tools synthex inferencia ia neural">
+<div class="relative w-full aspect-[16/10] bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.01]" data-alt="High throughput inference machine monitoring landing page interface, deep charcoal slate elevation, micro-latency chart rendered with precision monochrome lines and sharp geometric containers without stroke dividers" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTPzlLGtCIkvb3C4jAlOUqjrSHzW-HUxzJfCZ1-GQDY5-1vcGlNCaU1flC9NVP1jVzfPY89hFgtDv-domJ_0M6DmA6GAdqiqrHYSiKgOLZYpFRdqe9F2kgBEuDMiWtVUpzx0Meca0qLU6r1k0s2PUgJ2qam9cY9YxOjmGpmEKNWcA-NoFA3rrI0sYTglG17qEcEgThux6QVZ2pY8l5Ny1ewf27bEQVLV6fFTrf4DnM22Ah7wuZorD8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent opacity-80"></div>
+<div class="absolute top-space-md left-space-md">
+<span class="bg-surface-container-lowest/90 backdrop-blur-md px-space-sm py-space-xs rounded font-label-sm text-label-sm text-primary tracking-wider uppercase">06 // Inferencia Neuronal</span>
+</div>
+</div>
+<div class="p-space-lg flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">Synthex // Model Routing Mesh</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Arquitectura de distribución de inferencia con monitoreo determinista y baja varianza térmica.</p>
+</div>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Next.js 15 • Server Actions • Tailwind</div>
+<div class="flex items-center justify-between pt-space-xs">
+<button class="bg-surface-container-high hover:bg-surface-variant text-on-surface px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-colors duration-150" onclick="openDrawer('synthex')">
+              Prompt &amp; Estructura
+            </button>
+<button class="bg-primary hover:bg-primary/90 text-on-primary px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-all duration-150 flex items-center gap-space-xs" onclick="loadIntoGenerator('synthex', this)">
+<span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+<span>Cargar</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+</section>
+<div class="fixed inset-0 z-50 bg-surface-container-lowest/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300" id="drawer-backdrop"></div>
+<aside class="fixed top-0 right-0 z-50 h-full w-full max-w-2xl bg-surface-container-low shadow-[0_24px_64px_-12px_rgba(0,0,0,0.75)] transform translate-x-full transition-transform duration-300 flex flex-col" id="prompt-drawer">
+<div class="p-space-lg bg-surface-container flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Ficha Técnica &amp; Master Prompt</span>
+<h3 class="font-headline-sm text-headline-sm text-primary tracking-tight" id="drawer-title">Estructura Seleccionada</h3>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container-high hover:bg-surface-variant flex items-center justify-center text-on-surface transition-colors duration-150" onclick="closeDrawer()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="p-space-lg flex-1 overflow-y-auto flex flex-col gap-space-lg">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Especificación de Diseño</span>
+<div class="p-space-md bg-surface-container rounded-lg font-body-sm text-body-sm text-secondary flex flex-col gap-space-xs" id="drawer-meta">
+</div>
+</div>
+<div class="flex flex-col gap-space-xs flex-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Master Execution Prompt</span>
+<button class="font-label-sm text-label-sm text-primary hover:text-on-surface transition-colors duration-150 flex items-center gap-space-xs" id="copy-prompt-btn" onclick="copyDrawerPrompt()">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span id="copy-btn-text">Copiar Prompt</span>
+</button>
+</div>
+<div class="p-space-md bg-surface-container-lowest rounded-lg overflow-x-auto flex-1 font-mono text-[13px] leading-relaxed text-primary/90 select-all" id="drawer-prompt-content">
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-space-sm pt-space-xs">
+<button class="w-full bg-primary hover:bg-primary/90 text-on-primary py-space-sm px-space-md rounded-lg font-label-md text-label-md transition-all duration-150 flex items-center justify-center gap-space-xs" id="drawer-load-btn" onclick="loadFromDrawer()">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+<span>Inyectar en el Generador</span>
+</button>
+<button class="w-full sm:w-auto bg-surface-container-high hover:bg-surface-variant text-on-surface py-space-sm px-space-md rounded-lg font-label-md text-label-md transition-colors duration-150" onclick="closeDrawer()">
+          Cerrar
+        </button>
+</div>
+</div>
+</aside>
+<div class="fixed bottom-space-lg left-1/2 -translate-x-1/2 z-50 bg-surface-bright text-primary px-space-lg py-space-sm rounded-full shadow-[0_24px_64px_-12px_rgba(0,0,0,0.75)] font-label-md text-label-md flex items-center gap-space-sm opacity-0 pointer-events-none transition-all duration-300" id="feedback-toast">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span id="toast-message">Arquitectura cargada correctamente</span>
+</div>
+</div>
+<script>
+  const designData = {
+    kroma: {
+      title: "Kroma // Observability Cloud",
+      meta: "Target: Infraestructura Cloud • Luminancia Base: #0A0A0A • Retícula: 12 Columnas Asimétrica • Tipografía: Hanken Grotesk Display • Sin líneas de división",
+      prompt: "Execute an ultra-austere, monolithic landing page for 'Kroma', an observability and distributed systems platform. Zero 1px borders or lines. Surface contrast must rely exclusively on deep matte layers: canvas at #0A0A0A, content blocks at #141414, and interactive chips at #1F1F1F. Primary visual elements must be high-contrast typographic metrics, dense telemetry charts with no enclosing frames, and wide spatial padding (minimum 40px internal). Include a command-line terminal simulation at hero fold with zero decorative badges."
+    },
+    monolith: {
+      title: "Monolith // High-Frequency Financial Core",
+      meta: "Target: Fintech Institucional • Luminancia Base: #080808 • Retícula: 4 Columnas Brutalistas • Tipografía: Monospace & High-Contrast Headline",
+      prompt: "Create an institutional high-frequency trading protocol landing page. Visual tone: quiet, mathematical, heavy matte slabs. Typography must carry 85% of visual weight with dramatic scale contrast (56px display against 11px micro-indicators). Strictly eliminate all green/red trend indicators; use solid white and muted grey #8E9192. Feature a live-rendered data stream ledger without table lines, relying on 24px vertical spacing per block."
+    },
+    aura: {
+      title: "Aura // Spatial Computing SDK",
+      meta: "Target: SDK & Gráficos Volumétricos • Luminancia Base: #101010 • Retícula: Fluid Split-Screen • Enfoque: Documentación Técnica de Precisión",
+      prompt: "Generate an architectural developer showcase for 'Aura Spatial SDK'. Split-screen layout: left viewport locked with high-density API parameters and function signatures; right canvas hosting interactive spatial bounding boxes rendered in pure white monochrome. Total absence of borders. Dark elevation shifts using #1A1A1A and soft dispersion drop-shadows."
+    },
+    atelier: {
+      title: "Atelier // Horology & Materials",
+      meta: "Target: E-commerce Físico de Alto Valor • Luminancia Base: #0C0C0C • Retícula: Editorial Asimétrico Libre • Tipografía: Escala Clásica Rediseñada",
+      prompt: "Design an editorial e-commerce layout for high-precision mechanical titanium instruments. Deep matte black backdrop #0C0C0C. Massive single-word headers overlapping photography modules with -mt-16 negative margin. Text contrast handled via tonal layering. Include technical material breakdowns (Grade 5 Titanium, 48-hour reserve) aligned strictly as raw text blocks with no enclosing card borders."
+    },
+    vektor: {
+      title: "Vektor // Design Engineering Suite",
+      meta: "Target: Agencias & Estudios de Hardware • Luminancia Base: #0E0E0E • Retícula: 6 Columnas Modulares • Estilo: Monolítico Sin Adornos",
+      prompt: "Construct a portfolio and design execution engine landing page for 'Vektor'. Heavy brutalist visual balance: obsidian surfaces, zero stroke borders, 48px padding buffers. Display case studies through solid elevated modules #161616 with hover luminance lift to #202020. Emphasize micro-typography and precise spatial grouping."
+    },
+    synthex: {
+      title: "Synthex // Model Routing Mesh",
+      meta: "Target: Developer Tools & Inferencia • Luminancia Base: #0B0B0B • Retícula: 12 Columnas Centradas • Estilo: Alta Densidad de Datos",
+      prompt: "Architect an ultra-fast model routing mesh landing page. Layout must prioritize raw terminal inputs, deterministic latency comparisons, and architecture diagrams rendered with pure CSS surface offsets rather than SVG borders. Focus on high contrast white typography against dark matte graphite."
+    }
+  };
+
+  let activeDesignKey = null;
+
+  function openDrawer(key) {
+    activeDesignKey = key;
+    const item = designData[key];
+    if (!item) return;
+
+    document.getElementById('drawer-title').textContent = item.title;
+    document.getElementById('drawer-meta').textContent = item.meta;
+    document.getElementById('drawer-prompt-content').textContent = item.prompt;
+
+    const drawer = document.getElementById('prompt-drawer');
+    const backdrop = document.getElementById('drawer-backdrop');
+
+    drawer.classList.remove('translate-x-full');
+    backdrop.classList.remove('opacity-0', 'pointer-events-none');
+  }
+
+  function closeDrawer() {
+    const drawer = document.getElementById('prompt-drawer');
+    const backdrop = document.getElementById('drawer-backdrop');
+
+    drawer.classList.add('translate-x-full');
+    backdrop.classList.add('opacity-0', 'pointer-events-none');
+    activeDesignKey = null;
+  }
+
+  document.getElementById('drawer-backdrop').addEventListener('click', closeDrawer);
+
+  function showToast(message) {
+    const toast = document.getElementById('feedback-toast');
+    const toastMessage = document.getElementById('toast-message');
+    toastMessage.textContent = message;
+
+    toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
+    toast.classList.add('translate-y-0');
+
+    setTimeout(() => {
+      toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
+      toast.classList.remove('translate-y-0');
+    }, 2800);
+  }
+
+  function copyDrawerPrompt() {
+    const promptText = document.getElementById('drawer-prompt-content').textContent;
+    navigator.clipboard.writeText(promptText).then(() => {
+      const copyBtnText = document.getElementById('copy-btn-text');
+      copyBtnText.textContent = "¡Copiado!";
+      setTimeout(() => {
+        copyBtnText.textContent = "Copiar Prompt";
+      }, 2000);
+      showToast("Prompt maestro copiado al portapapeles");
+    });
+  }
+
+  function loadIntoGenerator(key, buttonEl) {
+    const originalContent = buttonEl.innerHTML;
+    buttonEl.innerHTML = '<span class="material-symbols-outlined text-[16px] animate-spin">progress_activity</span><span>Cargando...</span>';
+    buttonEl.disabled = true;
+
+    setTimeout(() => {
+      buttonEl.innerHTML = originalContent;
+      buttonEl.disabled = false;
+      const title = designData[key] ? designData[key].title : "Diseño";
+      showToast(`${title} transferido al espacio de trabajo`);
+    }, 600);
+  }
+
+  function loadFromDrawer() {
+    if (!activeDesignKey) return;
+    const btn = document.getElementById('drawer-load-btn');
+    const originalContent = btn.innerHTML;
+    btn.innerHTML = '<span class="material-symbols-outlined text-[16px] animate-spin">progress_activity</span><span>Inyectando parámetros...</span>';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.innerHTML = originalContent;
+      btn.disabled = false;
+      closeDrawer();
+      showToast(`Arquitectura inyectada en el Generador`);
+    }, 700);
+  }
+
+  function previewDesign(title) {
+    showToast(`Generando entorno interactivo para ${title}`);
+  }
+
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.gallery-card');
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => {
+        b.classList.remove('bg-surface-container-high', 'text-primary');
+        b.classList.add('text-on-surface-variant');
+      });
+      btn.classList.add('bg-surface-container-high', 'text-primary');
+      btn.classList.remove('text-on-surface-variant');
+
+      const filter = btn.getAttribute('data-filter');
+      cards.forEach(card => {
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  const searchInput = document.getElementById('search-input');
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    cards.forEach(card => {
+      const tags = card.getAttribute('data-tags') || '';
+      const cardTitle = card.querySelector('h2')?.textContent.toLowerCase() || '';
+      if (tags.includes(query) || cardTitle.includes(query)) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
+</script></main><footer class="w-full bg-surface-container-lowest mt-space-xl py-space-xl"><div class="w-full px-margin-mobile md:px-margin flex flex-col md:flex-row items-start md:items-center justify-between gap-space-lg"><div class="flex flex-col gap-space-xs"><span class="font-label-md text-label-md uppercase tracking-wider text-primary">Stratum Execution Engine</span><span class="font-body-sm text-body-sm text-on-surface-variant">Sistemas de aterrizaje de alto rendimiento, composición arquitectónica y archivo maestro.</span></div><div class="flex flex-wrap items-center gap-space-lg"><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors duration-150" href="#">Especificaciones</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors duration-150" href="#">API</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors duration-150" href="#">Protocolos</a><span class="font-label-sm text-label-sm text-on-surface-variant">© 2025 STRATUM</span></div></div></footer></body></html>
