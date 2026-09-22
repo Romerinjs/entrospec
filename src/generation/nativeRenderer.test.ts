@@ -30,6 +30,7 @@ describe('renderLandingDocument', () => {
     expect(html).toContain('<style>');
     expect(html).toContain('<script>');
     expect(html).toContain('prefers-reduced-motion');
+    expect(html).toContain(':focus-visible');
     expect(html).not.toMatch(/<(script|link)[^>]+src=/i);
     expect(html).not.toMatch(/https?:\/\//i);
   });

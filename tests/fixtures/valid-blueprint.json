@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "brandInterpretation": { "brandName": "Northline", "industry": "Infraestructura", "audience": "Equipos técnicos", "tone": "Directo", "promise": "Decisiones claras" },
+  "designTokens": { "background": "#0A0A0A", "surface": "#141414", "accent": "#22C55E", "textPrimary": "#F3F3F3", "textSecondary": "#A1A1A1", "fontDisplay": "system-ui", "fontBody": "system-ui", "radius": "4px" },
+  "layout": { "style": "Brutalismo Suizo", "heroFocus": "Punto focal", "scrollRhythm": "Lento" },
+  "sections": [
+    { "id": "hero", "type": "hero", "heading": "Decide con claridad", "body": "Una propuesta verificable.", "ctaLabel": "Ver prueba", "ctaAction": "#proof" },
+    { "id": "proof", "type": "proof", "heading": "¿Qué duda resolvemos?", "body": "Explicación concreta y respuesta verificable a la objeción principal." },
+    { "id": "cta", "type": "cta", "heading": "Empieza ahora", "body": "Acceso directo." }
+  ],
+  "visualDirection": { "concept": "Cristal técnico", "imagePrompt": "Macro de cristal oscuro", "alt": "Textura técnica oscura" },
+  "interactionPlan": [{ "id": "reveal", "trigger": "scroll", "behavior": "reveal", "reducedMotion": "instant" }],
+  "techniquePlan": [{ "techniqueId": 1, "intent": "semilla", "evidence": "seed" }, { "techniqueId": 2, "intent": "objeciones", "evidence": "objection" }, { "techniqueId": 3, "intent": "audit", "evidence": "checks" }, { "techniqueId": 4, "intent": "hero", "evidence": "asset" }, { "techniqueId": 5, "intent": "motion", "evidence": "reduced-motion" }, { "techniqueId": 6, "intent": "sustracción", "evidence": "density" }, { "techniqueId": 7, "intent": "anti-slop", "evidence": "scan" }, { "techniqueId": 8, "intent": "copy", "evidence": "cta" }],
+  "negativeConstraints": ["sin dependencias externas"],
+  "metadata": { "seed": "Abc123!xyZ890", "title": "Northline", "psychologyAngle": "Reducir duda" }
+}
