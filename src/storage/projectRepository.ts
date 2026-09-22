@@ -8,6 +8,7 @@ export interface ProjectRepository {
   listCurated(): Promise<any[]>;
   getVisualAsset(cacheKey: string): Promise<GeneratedVisualAsset | undefined>;
   putVisualAsset(asset: GeneratedVisualAsset): Promise<void>;
+  deleteProject(id: string): Promise<void>;
   migrateLegacyProjects(storage: { getItem(key: string): string | null; removeItem(key: string): void }): Promise<void>;
 }
 
@@ -27,6 +28,7 @@ export function createProjectRepository(options: { databaseName?: string } = {})
     listCurated: () => list('curated'),
     async getVisualAsset(cacheKey) { const db = await dbPromise; return requestResult<GeneratedVisualAsset | undefined>(db.transaction('visualAssets', 'readonly').objectStore('visualAssets').get(cacheKey)); },
     async putVisualAsset(asset) { const db = await dbPromise; const tx = db.transaction('visualAssets', 'readwrite'); tx.objectStore('visualAssets').put({ ...asset, createdAt: new Date().toISOString() }); await new Promise<void>((resolve, reject) => { tx.oncomplete = () => resolve(); tx.onerror = () => reject(storageError('No se pudo guardar el activo.')); }); },
+    async deleteProject(id) { const db = await dbPromise; const tx = db.transaction('projects', 'readwrite'); tx.objectStore('projects').delete(id); await new Promise<void>((resolve, reject) => { tx.oncomplete = () => resolve(); tx.onerror = () => reject(storageError('No se pudo eliminar el proyecto.')); }); },
     async migrateLegacyProjects(storage) {
       const raw = storage.getItem('entrospec_landing_bank');
       if (!raw) return;
