@@ -1,7 +1,7 @@
 # Resilient Landing Generation Design
 
 **Date:** 2026-09-22
-**Status:** Approved in conversation; pending review of this written specification
+**Status:** Approved on 2026-09-22
 
 ## 1. Purpose
 
