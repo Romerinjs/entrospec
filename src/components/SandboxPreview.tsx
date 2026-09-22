@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ViewportMode } from '../types';
 
 interface SandboxPreviewProps {
@@ -17,6 +17,19 @@ export const SandboxPreview: React.FC<SandboxPreviewProps> = ({
   const [viewport, setViewport] = useState<ViewportMode>('desktop');
   const [viewMode, setViewMode] = useState<'preview' | 'code'>('preview');
   const [copiedCode, setCopiedCode] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // Cerrar menú al hacer clic fuera
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const getViewportWidth = () => {
     switch (viewport) {
@@ -40,6 +53,7 @@ export const SandboxPreview: React.FC<SandboxPreviewProps> = ({
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+    setIsMenuOpen(false);
   };
 
   const handleCopyCode = async () => {
@@ -54,83 +68,120 @@ export const SandboxPreview: React.FC<SandboxPreviewProps> = ({
   };
 
   return (
-    <div className="h-full flex flex-col rounded-lg bg-[#141414] overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.6)]">
+    <div className="h-full flex flex-col bg-[#141414] overflow-hidden">
       {/* Top Toolbar */}
-      <div className="px-5 py-3.5 bg-[#191919] flex flex-wrap items-center justify-between gap-3">
+      <div className="px-6 py-4 bg-[#191919] flex flex-wrap items-center justify-between gap-4">
         {/* Left: View Mode (Preview vs Code) */}
-        <div className="flex items-center gap-1 bg-[#141414] p-1 rounded-full">
+        <div className="flex items-center gap-1">
           <button
             onClick={() => setViewMode('preview')}
-            className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-              viewMode === 'preview' ? 'bg-[#282828] text-[#F3F3F3]' : 'text-[#737373] hover:text-[#A1A1A1]'
+            className={`px-3 py-1.5 text-xs font-medium transition-colors ${
+              viewMode === 'preview' ? 'bg-[#282828] text-[#F3F3F3]' : 'bg-[#141414] text-[#737373] hover:text-[#A1A1A1]'
             }`}
           >
             Vista Previa
           </button>
           <button
             onClick={() => setViewMode('code')}
-            className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-              viewMode === 'code' ? 'bg-[#282828] text-[#F3F3F3]' : 'text-[#737373] hover:text-[#A1A1A1]'
+            className={`px-3 py-1.5 text-xs font-medium transition-colors ${
+              viewMode === 'code' ? 'bg-[#282828] text-[#F3F3F3]' : 'bg-[#141414] text-[#737373] hover:text-[#A1A1A1]'
             }`}
           >
             Código HTML5
           </button>
         </div>
 
-        {/* Center: Viewport Controls */}
+        {/* Center: Viewport Icons with Tooltips */}
         {viewMode === 'preview' && (
-          <div className="flex items-center gap-1 bg-[#141414] p-1 rounded-full">
+          <div className="flex items-center gap-1 bg-[#141414] p-1">
             <button
               onClick={() => setViewport('desktop')}
-              className={`px-3 py-1 rounded-full text-[11px] mono transition-colors ${
+              title="Escritorio"
+              aria-label="Vista Escritorio"
+              className={`p-2 transition-colors flex items-center justify-center ${
                 viewport === 'desktop' ? 'bg-[#282828] text-[#F3F3F3]' : 'text-[#737373] hover:text-[#A1A1A1]'
               }`}
             >
-              Desktop (100%)
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
             </button>
+
             <button
               onClick={() => setViewport('tablet')}
-              className={`px-3 py-1 rounded-full text-[11px] mono transition-colors ${
+              title="Tablet"
+              aria-label="Vista Tablet"
+              className={`p-2 transition-colors flex items-center justify-center ${
                 viewport === 'tablet' ? 'bg-[#282828] text-[#F3F3F3]' : 'text-[#737373] hover:text-[#A1A1A1]'
               }`}
             >
-              Tablet (768px)
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="4" y="2" width="16" height="20" rx="2" />
+                <line x1="12" y1="18" x2="12.01" y2="18" />
+              </svg>
             </button>
+
             <button
               onClick={() => setViewport('mobile')}
-              className={`px-3 py-1 rounded-full text-[11px] mono transition-colors ${
+              title="Móvil"
+              aria-label="Vista Móvil"
+              className={`p-2 transition-colors flex items-center justify-center ${
                 viewport === 'mobile' ? 'bg-[#282828] text-[#F3F3F3]' : 'text-[#737373] hover:text-[#A1A1A1]'
               }`}
             >
-              Mobile (375px)
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="6" y="2" width="12" height="20" rx="2" />
+                <line x1="12" y1="18" x2="12.01" y2="18" />
+              </svg>
             </button>
           </div>
         )}
 
-        {/* Right Actions: Save to Bank & Export */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={onSaveToBank}
-            className={`h-8 px-3.5 rounded-sm text-xs font-medium transition-all ${
-              isSaved
-                ? 'bg-[#22C55E]/20 text-[#22C55E]'
-                : 'bg-[#1F1F1F] hover:bg-[#282828] text-[#F3F3F3]'
-            }`}
-          >
-            {isSaved ? '✓ En Banco' : '+ Guardar en Banco'}
-          </button>
-
+        {/* Right: Menú desplegable de 3 líneas con modal-reveal de 0.5s */}
+        <div className="relative" ref={menuRef}>
           {viewMode === 'preview' ? (
-            <button
-              onClick={handleDownload}
-              className="h-8 px-3.5 rounded-sm bg-[#F3F3F3] text-[#0A0A0A] text-xs font-semibold hover:opacity-90 active:scale-95 transition-all"
-            >
-              Descargar .html
-            </button>
+            <>
+              <button
+                onClick={() => setIsMenuOpen(prev => !prev)}
+                title="Opciones de exportación y guardado"
+                aria-label="Opciones"
+                className="h-9 px-3.5 bg-[#1F1F1F] hover:bg-[#282828] text-[#F3F3F3] transition-colors flex items-center justify-center gap-2"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="4" y1="6" x2="20" y2="6" />
+                  <line x1="4" y1="12" x2="20" y2="12" />
+                  <line x1="4" y1="18" x2="20" y2="18" />
+                </svg>
+              </button>
+
+              {isMenuOpen && (
+                <div className="modal-reveal absolute right-0 top-full mt-2 w-48 bg-[#1F1F1F] shadow-2xl py-1 z-50 flex flex-col">
+                  <button
+                    onClick={() => {
+                      onSaveToBank();
+                      setIsMenuOpen(false);
+                    }}
+                    className="w-full px-4 py-2.5 text-left text-xs font-medium text-[#F3F3F3] hover:bg-[#282828] transition-colors flex items-center justify-between"
+                  >
+                    <span>{isSaved ? 'En Banco' : 'Guardar en Banco'}</span>
+                    {isSaved && <span className="text-[#22C55E] font-bold">✓</span>}
+                  </button>
+
+                  <button
+                    onClick={handleDownload}
+                    className="w-full px-4 py-2.5 text-left text-xs font-medium text-[#F3F3F3] hover:bg-[#282828] transition-colors"
+                  >
+                    Descargar .html
+                  </button>
+                </div>
+              )}
+            </>
           ) : (
             <button
               onClick={handleCopyCode}
-              className="h-8 px-3.5 rounded-sm bg-[#F3F3F3] text-[#0A0A0A] text-xs font-semibold hover:opacity-90 active:scale-95 transition-all"
+              className="h-9 px-4 bg-[#F3F3F3] text-[#0A0A0A] text-xs font-semibold hover:opacity-90 active:scale-95 transition-all"
             >
               {copiedCode ? '✓ Copiado' : 'Copiar Código'}
             </button>
@@ -139,9 +190,9 @@ export const SandboxPreview: React.FC<SandboxPreviewProps> = ({
       </div>
 
       {/* Main Sandbox Content */}
-      <div className="flex-1 bg-[#0A0A0A] p-4 flex items-center justify-center min-h-[560px] overflow-auto">
+      <div className="flex-1 bg-[#0A0A0A] p-6 flex items-center justify-center min-h-[560px] overflow-auto">
         {viewMode === 'preview' ? (
-          <div className={`${getViewportWidth()} h-full min-h-[540px] transition-all duration-300 rounded-md overflow-hidden bg-[#0D0D0D] shadow-2xl flex flex-col`}>
+          <div className={`${getViewportWidth()} h-full min-h-[540px] transition-all duration-300 bg-[#0D0D0D] flex flex-col`}>
             <iframe
               title="Landing Sandbox Preview"
               srcDoc={htmlCode}
@@ -150,7 +201,7 @@ export const SandboxPreview: React.FC<SandboxPreviewProps> = ({
             />
           </div>
         ) : (
-          <div className="w-full h-full min-h-[540px] p-4 rounded-md bg-[#0D0D0D] overflow-auto font-mono text-xs text-[#A1A1A1] leading-relaxed">
+          <div className="w-full h-full min-h-[540px] p-4 bg-[#0D0D0D] overflow-auto font-mono text-xs text-[#A1A1A1] leading-relaxed">
             <pre className="whitespace-pre-wrap">{htmlCode}</pre>
           </div>
         )}
