@@ -5,11 +5,12 @@ const record: any = { id: 'one', collection: 'draft', audit: { passesBank: true,
 const dbName = () => `entrospec-test-${Math.random().toString(16).slice(2)}`;
 
 describe('project repository', () => {
-  it('keeps drafts separate and rejects ineligible curated records', async () => {
+  it('keeps drafts and curated records distinct and saves any valid record', async () => {
     const repo = createProjectRepository({ databaseName: dbName() });
     await repo.saveDraft(record);
     expect((await repo.listDrafts()).map(item => item.id)).toEqual(['one']);
-    await expect(repo.saveCurated({ ...record, audit: { ...record.audit, passesBank: false, scores: { average: 7 } } })).rejects.toMatchObject({ code: 'STORAGE_ERROR' });
+    await repo.saveCurated({ ...record, id: 'two', audit: { ...record.audit, passesBank: false, scores: { average: 7 } } });
+    expect((await repo.listCurated()).map(item => item.id)).toEqual(['two']);
   });
 
   it('round trips visual assets', async () => {

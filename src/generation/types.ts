@@ -183,4 +183,9 @@ export interface GenerationRecord {
   compositionRepair?: { initialSimilarity: number; finalSimilarity: number; attempts: number; repaired: boolean };
   requestDiagnostics?: { transmittedPrompt: string; rawModelText: string; extractedHtml: string; model: string; temperature: number; responseMimeType: string; executionMode: ExecutionMode };
   techniqueTrace?: Array<{ id: number; technique: string; active: boolean; injected: boolean; audited: boolean; evidence: string; directive: string }>;
+  creativeContract?: import('../diversity/creativeContract').CreativeContract;
+  aiNativeFingerprint?: import('../diversity/nativeStructureFingerprint').AiNativeStructureFingerprint;
+  aiNativeSimilarity?: { nearestId?: string; score: number; threshold: number; regenerationAttempts: number; maxAttempts: number; aboveThreshold: boolean };
+  unsupportedClaim?: boolean;
+  unsupportedClaims?: import('../diversity/nativeStructureFingerprint').UnsupportedClaim[];
 }

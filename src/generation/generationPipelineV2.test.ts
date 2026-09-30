@@ -36,7 +36,7 @@ describe('generation pipeline v2', () => {
   });
 
   it('AI Native returns Gemini HTML intact without entering V2 genome or renderer', async () => {
-    const html = '<!doctype html><html><head><style>body{background:#FDFBF7;color:#284b3d}</style></head><body><main><h1>Crema</h1></main></body></html>';
+    const html = '<!doctype html><html><head><style>body{background:#FDFBF7;color:#284b3d}</style></head><body><main><h1>Crema</h1><p>+85% de impacto garantizado</p></main></body></html>';
     const { pipeline, gateway } = createPipeline();
     gateway.requestHtmlDocument = vi.fn().mockResolvedValue({ transmittedPrompt: 'brief + contract', rawModelText: html, extractedHtml: html, model: 'gemini-test', temperature: 0.82, responseMimeType: 'text/plain' });
     const render = vi.spyOn(primitiveRenderer, 'renderBlueprintV2');
@@ -44,9 +44,33 @@ describe('generation pipeline v2', () => {
     expect(result.htmlCode).toBe(html);
     expect(result.htmlCode).toContain('#FDFBF7');
     expect(gateway.requestHtmlDocument).toHaveBeenCalledTimes(1);
+    expect(gateway.requestHtmlDocument).toHaveBeenCalledWith(expect.objectContaining({ prompt: expect.stringContaining('CREATIVE CONTRACT — SEMANTIC DIRECTION ONLY') }), expect.any(AbortSignal));
+    expect(gateway.requestHtmlDocument.mock.calls[0][0].prompt).toContain('NEVER invent statistics, certifications, guarantees');
     expect(gateway.requestCreativeProposalV2).not.toHaveBeenCalled();
     expect(render).not.toHaveBeenCalled();
     expect(result.callsUsed).toEqual({ textCalls: 1, imageCalls: 0, totalCalls: 1 });
+    expect(result.unsupportedClaim).toBe(true);
+    expect(result.unsupportedClaims?.some(claim => claim.text.includes('85%'))).toBe(true);
+    expect(result.creativeContract?.seedDecisions.length).toBeGreaterThan(0);
+    expect(result.aiNativeFingerprint?.heroLayout).toBe('single-field');
+    render.mockRestore();
+  });
+
+  it('requests a second Gemini HTML generation for high structural similarity and never renders it locally', async () => {
+    const repeatedHtml = '<!doctype html><html><head><style>.hero{display:grid;grid-template-columns:1fr 1fr}.cards{display:grid;grid-template-columns:repeat(3,1fr)}</style></head><body><main><section class="hero"><h1>Brand</h1></section><section class="cards"><article class="card">A</article><article class="card">B</article><article class="card">C</article></section><section class="faq"><details><summary>Question?</summary>Answer</details></section></main></body></html>';
+    const alternativeHtml = '<!doctype html><html><head><style>.opening{font-size:clamp(4rem,12vw,9rem)}.proof{width:100vw}</style></head><body><main><section class="opening"><h1>Brand</h1></section><section class="proof"><p>Proof</p></section><section class="conversation"><p>Question?</p><p>Answer</p></section><section><form><button>Act</button></form></section></main></body></html>';
+    const gateway = { requestCreativeProposalV2: vi.fn(), requestHeroImage: vi.fn(), requestHtmlDocument: vi.fn()
+      .mockImplementationOnce(async ({ prompt }: { prompt: string }) => ({ transmittedPrompt: prompt, rawModelText: repeatedHtml, extractedHtml: repeatedHtml, model: 'test-model', temperature: 0.82, responseMimeType: 'text/plain' }))
+      .mockImplementationOnce(async ({ prompt }: { prompt: string }) => ({ transmittedPrompt: prompt, rawModelText: alternativeHtml, extractedHtml: alternativeHtml, model: 'test-model', temperature: 0.82, responseMimeType: 'text/plain' })) };
+    const pipeline = createGenerationPipelineV2({ gateway: gateway as any, cache: { get: vi.fn(), put: vi.fn() }, codec: { compress: vi.fn() }, recentDocuments: async () => [{ id: 'recent', htmlCode: repeatedHtml }], nativeSimilarityThreshold: 0.1, nativeMaxAttempts: 1 });
+    const render = vi.spyOn(primitiveRenderer, 'renderBlueprintV2');
+    const result = await pipeline.run({ ...request('retry-seed'), executionMode: 'ai_native_html' });
+    expect(gateway.requestHtmlDocument).toHaveBeenCalledTimes(2);
+    expect(result.htmlCode).toBe(alternativeHtml);
+    expect(result.callsUsed.textCalls).toBe(2);
+    expect(result.aiNativeSimilarity).toMatchObject({ nearestId: 'recent', regenerationAttempts: 1, maxAttempts: 1 });
+    expect(gateway.requestHtmlDocument.mock.calls[1][0].prompt).toContain('SIMILARITY REGENERATION');
+    expect(render).not.toHaveBeenCalled();
     render.mockRestore();
   });
 

@@ -40,6 +40,10 @@ test('builds AI Native HTML, displays the exact request, and measures responsive
   await expect(generatedPage.getByText('Landing crema')).toBeVisible();
   await expect(page.getByRole('region', { name: 'Request final enviado a Gemini' })).toBeVisible();
   await expect(page.getByText(/model: .+ · temperature: 0.82 · responseMimeType: text\/plain · executionMode: ai_native_html/)).toBeVisible();
+  await page.getByRole('button', { name: 'Creative Contract' }).click();
+  await expect(page.getByText('Seed decisions · seed → decision → directive')).toBeVisible();
+  await page.getByRole('button', { name: 'Structure Fingerprint' }).click();
+  await expect(page.getByText(/Similarity to recent:/)).toBeVisible();
   const creativePrompt = await page.getByLabel('Campo de ejecución con IA').inputValue();
   const transmittedPrompt = await page.getByRole('textbox', { name: 'Request final enviado a Gemini' }).inputValue();
   expect(transmittedPrompt.startsWith(creativePrompt)).toBe(true);

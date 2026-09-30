@@ -3,7 +3,8 @@ import type { GenerationRecord } from '../generation/types';
 
 export const GenerationInspector: React.FC<{ record: GenerationRecord }> = ({ record }) => {
   const [tab, setTab] = useState('prompt');
-  const architectureTabs = record.blueprintV2 ? ['prompt', 'art-direction', 'genome', 'composition', 'fingerprint', 'evidence'] : ['prompt', 'blueprint', 'evidence'];
+  const isAiNative = record.request.executionMode === 'ai_native_html';
+  const architectureTabs = isAiNative ? ['prompt', 'creative-contract', 'structure', 'evidence'] : record.blueprintV2 ? ['prompt', 'art-direction', 'genome', 'composition', 'fingerprint', 'evidence'] : ['prompt', 'blueprint', 'evidence'];
   const totalCalls = record.callsUsed.totalCalls ?? (record.callsUsed.textCalls + record.callsUsed.imageCalls);
 
   return (
@@ -48,7 +49,7 @@ export const GenerationInspector: React.FC<{ record: GenerationRecord }> = ({ re
               tab === item ? 'bg-[#282828] text-[#F3F3F3]' : 'bg-[#1F1F1F] text-[#737373] hover:text-[#A1A1A1]'
             }`}
           >
-            {item}
+            {item === 'creative-contract' ? 'Creative Contract' : item === 'structure' ? 'Structure Fingerprint' : item}
           </button>
         ))}
       </div>
@@ -67,6 +68,37 @@ export const GenerationInspector: React.FC<{ record: GenerationRecord }> = ({ re
         <pre className="flex-1 overflow-auto bg-[#0A0A0A] p-3 font-mono text-[11px] text-[#A1A1A1]">
           {JSON.stringify(record.blueprint, null, 2)}
         </pre>
+      )}
+
+      {tab === 'creative-contract' && isAiNative && record.creativeContract && (
+        <div className="flex flex-1 flex-col gap-3 overflow-auto bg-[#0A0A0A] p-3 text-xs text-[#A1A1A1]">
+          <h3 className="text-sm text-[#F3F3F3]">Creative Contract · directivas para Gemini</h3>
+          <p><strong className="text-[#F3F3F3]">Art direction:</strong> {record.creativeContract.artDirection}</p>
+          <p><strong className="text-[#F3F3F3]">Composition grammar:</strong> {record.creativeContract.compositionGrammar}</p>
+          <p><strong className="text-[#F3F3F3]">Visual rhythm / density:</strong> {record.creativeContract.visualRhythm} / {record.creativeContract.density}</p>
+          <p><strong className="text-[#F3F3F3]">Typography:</strong> {record.creativeContract.typographyBehavior}</p>
+          <p><strong className="text-[#F3F3F3]">Visual strategy:</strong> {record.creativeContract.visualStrategy}</p>
+          <p><strong className="text-[#F3F3F3]">Novelty / intensity / convention breaking:</strong> {record.creativeContract.noveltyBudget.toFixed(2)} / {record.creativeContract.artDirectionIntensity.toFixed(2)} / {String(record.creativeContract.conventionBreaking)}</p>
+          <h4 className="text-[#F3F3F3]">Commercial purposes</h4>
+          <ul className="list-disc pl-5">{record.creativeContract.commercialPurposes.map(item => <li key={item}>{item}</li>)}</ul>
+          <h4 className="text-[#F3F3F3]">Selected morphologies</h4>
+          <ul className="list-disc pl-5">{Object.entries(record.creativeContract.morphologyConstraints).map(([purpose, item]) => <li key={purpose}><strong>{purpose}:</strong> {item.selected} · alternatives: {item.alternatives.join(', ')}</li>)}</ul>
+          <h4 className="text-[#F3F3F3]">Prohibited patterns</h4>
+          <ul className="list-disc pl-5">{record.creativeContract.prohibitedPatterns.map(item => <li key={item}>{item}</li>)}</ul>
+          <h4 className="text-[#F3F3F3]">Seed decisions · seed → decision → directive</h4>
+          <ul className="list-disc pl-5">{record.creativeContract.seedDecisions.map(item => <li key={item.seed}><code>{item.seed}</code> → {item.decision} → {item.promptDirective}</li>)}</ul>
+        </div>
+      )}
+
+      {tab === 'structure' && isAiNative && (
+        <div className="flex flex-1 flex-col gap-3 overflow-auto bg-[#0A0A0A] p-3 text-xs text-[#A1A1A1]">
+          <h3 className="text-sm text-[#F3F3F3]">Structure Fingerprint</h3>
+          <p>Similarity to recent: <strong className="text-[#F3F3F3]">{record.aiNativeSimilarity?.score.toFixed(3) ?? '—'}</strong> · umbral {record.aiNativeSimilarity?.threshold.toFixed(3) ?? '—'} · referencia {record.aiNativeSimilarity?.nearestId ?? 'sin historial'}</p>
+          <p>Intentos de regeneración: {record.aiNativeSimilarity?.regenerationAttempts ?? 0} / {record.aiNativeSimilarity?.maxAttempts ?? 0} · por encima del umbral: {String(record.aiNativeSimilarity?.aboveThreshold ?? false)}</p>
+          <pre className="whitespace-pre-wrap font-mono text-[10px]">{JSON.stringify(record.aiNativeFingerprint, null, 2)}</pre>
+          <h4 className="text-[#F3F3F3]">Unsupported claims</h4>
+          {record.unsupportedClaims?.length ? <ul className="list-disc pl-5">{record.unsupportedClaims.map((claim, index) => <li key={`${claim.text}-${index}`}>{claim.kind}: “{claim.text}”</li>)}</ul> : <p>No se detectaron cifras o garantías sin respaldo en el brief.</p>}
+        </div>
       )}
 
       {tab === 'art-direction' && record.blueprintV2 && (
@@ -117,10 +149,10 @@ export const GenerationInspector: React.FC<{ record: GenerationRecord }> = ({ re
               {record.callsUsed.textCalls} texto · {record.callsUsed.imageCalls} imagen
             </span>
           </div>
-          <div className="flex justify-between items-center bg-[#191919] p-3">
+          {!isAiNative && <div className="flex justify-between items-center bg-[#191919] p-3">
             <span className="text-[#737373]">Internal Technique Score</span>
             <span className="mono font-semibold text-[#22C55E]">{record.audit.scores.average}/10</span>
-          </div>
+          </div>}
           {record.audit.evidence.map(item => (
             <div key={item.techniqueId} className="bg-[#1F1F1F] p-3">
               <div className="flex justify-between items-center">

@@ -18,13 +18,18 @@ import { repairCompositionForNovelty } from '../diversity/compositionRepair';
 import { repairResponsiveComposition } from '../composition/repairEngine';
 import { validateGeneratedDocument } from './documentValidator';
 import { TECHNIQUE_CATALOG } from './techniqueCatalog';
+import { composeCreativeContractPrompt, createCreativeContract } from '../diversity/creativeContract';
+import { compareAiNativeFingerprints, createAiNativeStructureFingerprint, detectUnsupportedClaims, type AiNativeStructureFingerprint } from '../diversity/nativeStructureFingerprint';
 
 export interface GenerationPipelineV2Dependencies {
   gateway: Pick<GeminiGateway, 'requestCreativeProposalV2' | 'requestHeroImage' | 'requestHtmlDocument'>;
   cache: VisualAssetCache;
   codec: ImageCodec;
   recentStructures?: () => Promise<FingerprintCandidate[]>;
+  recentDocuments?: () => Promise<Array<{ id: string; htmlCode: string }>>;
   similarityThreshold?: number;
+  nativeSimilarityThreshold?: number;
+  nativeMaxAttempts?: number;
   now?: () => string;
 }
 
@@ -66,11 +71,41 @@ export function createGenerationPipelineV2(deps: GenerationPipelineV2Dependencie
       try {
         emit('building_prompt');
         if (request.executionMode === 'ai_native_html') {
-          emit('generating_blueprint');
-          const nativeResult = await deps.gateway.requestHtmlDocument({ prompt: request.executedPrompt }, controller.signal);
-          if (thisRun !== runId) throw new Error('Superseded generation');
-          const documentReport = validateGeneratedDocument(nativeResult.extractedHtml);
-          if (documentReport.blockingIssues.length) throw new Error(`Documento HTML inválido: ${documentReport.blockingIssues.map(issue => issue.message).join(' ')}`);
+          const recentDocuments = await deps.recentDocuments?.() ?? [];
+          const recentFingerprints = recentDocuments.map(document => ({ id: document.id, fingerprint: createAiNativeStructureFingerprint(document.htmlCode) }));
+          const threshold = deps.nativeSimilarityThreshold ?? deps.similarityThreshold ?? 0.82;
+          const maxAttempts = Math.max(0, deps.nativeMaxAttempts ?? 2);
+          let nativeResult: Awaited<ReturnType<GeminiGateway['requestHtmlDocument']>> | undefined;
+          let documentReport: ReturnType<typeof validateGeneratedDocument> | undefined;
+          let fingerprint: AiNativeStructureFingerprint | undefined;
+          let closest: { id: string; score: number } | undefined;
+          let creativeContract: ReturnType<typeof createCreativeContract> | undefined;
+          let attempt = 0;
+          let excludedMorphologies: string[] = [];
+          let regenerationDirective = '';
+          while (attempt <= maxAttempts) {
+            emit('generating_blueprint');
+            creativeContract = createCreativeContract({
+              brief: request.brief, entropySeed, styleSeed, prompt: request.executedPrompt,
+              noveltyBudget: request.noveltyBudget, artDirectionIntensity: request.creativeRisk === 'high' ? 0.9 : request.creativeRisk === 'low' ? 0.45 : 0.7,
+              recentFingerprints, attempt, excludedMorphologies
+            });
+            nativeResult = await deps.gateway.requestHtmlDocument({ prompt: `${request.executedPrompt}${regenerationDirective}\n\n${composeCreativeContractPrompt(creativeContract)}` }, controller.signal);
+            if (thisRun !== runId) throw new Error('Superseded generation');
+            documentReport = validateGeneratedDocument(nativeResult.extractedHtml);
+            if (documentReport.blockingIssues.length) throw new Error(`Documento HTML inválido: ${documentReport.blockingIssues.map(issue => `${issue.code}: ${issue.message}`).join(' ')}`);
+            fingerprint = createAiNativeStructureFingerprint(nativeResult.extractedHtml);
+            closest = recentFingerprints.map(candidate => ({ id: candidate.id, score: compareAiNativeFingerprints(fingerprint!, candidate.fingerprint) })).sort((a, b) => b.score - a.score)[0];
+            if (!closest || closest.score <= threshold || attempt >= maxAttempts) break;
+            excludedMorphologies = [
+              ...excludedMorphologies,
+              ...Object.values(creativeContract.morphologyConstraints).map(item => item.selected),
+              fingerprint.heroLayout, fingerprint.faqMorphology, fingerprint.ctaMorphology, ...fingerprint.gridPatterns
+            ];
+            regenerationDirective = `\n\nSIMILARITY REGENERATION ${attempt + 1}: Preserve all content, verifiable claims, brand, and user restrictions. The architecture is too similar to a recent generation (${closest.score.toFixed(3)} > ${threshold.toFixed(3)}). Regenerate using these alternative morphologies: ${Object.entries(creativeContract.morphologyConstraints).map(([purpose, value]) => `${purpose}=${value.alternatives[0] ?? 'a distinct compatible structure'}`).join('; ')}. Do not change the commercial information.`;
+            attempt++;
+          }
+          if (!nativeResult || !documentReport || !fingerprint || !creativeContract) throw new Error('AI Native no produjo un documento para auditar.');
           emit('compiling');
           emit('auditing');
           const htmlCode = nativeResult.extractedHtml;
@@ -82,8 +117,13 @@ export function createGenerationPipelineV2(deps: GenerationPipelineV2Dependencie
             id: `generation-${(deps.now ?? (() => new Date().toISOString()))().replace(/[^0-9]/g, '')}`,
             request: { ...request, architectureVersion: 2 }, blueprint, blueprintSource: 'gemini', htmlCode, visual: neutralVisual,
             audit: { passesBank: false, scores: score, subtractiveDiagnosis: 'Auditoría pendiente de DOM real.', strengths: [], refactorSuggested: '', evidence: [], blockers: documentReport.warnings.map(issue => issue.message) },
-            callsUsed: { textCalls: 1, imageCalls: 0, totalCalls: 1 },
+            callsUsed: { textCalls: attempt + 1, imageCalls: 0, totalCalls: attempt + 1 },
             requestDiagnostics: { ...nativeResult, executionMode: 'ai_native_html' },
+            creativeContract,
+            aiNativeFingerprint: fingerprint,
+            aiNativeSimilarity: { nearestId: closest?.id, score: closest?.score ?? 0, threshold, regenerationAttempts: attempt, maxAttempts, aboveThreshold: Boolean(closest && closest.score > threshold) },
+            unsupportedClaims: detectUnsupportedClaims(htmlCode, request.brief),
+            unsupportedClaim: detectUnsupportedClaims(htmlCode, request.brief).length > 0,
             techniqueTrace: TECHNIQUE_CATALOG.map(def => { const active = request.activeTechniqueIds.includes(def.id); const injectedDirectives = def.promptDirectives.filter(directive => request.executedPrompt.includes(directive)); return { id: def.id, technique: def.title, active, injected: active && injectedDirectives.length === def.promptDirectives.length, audited: false, evidence: injectedDirectives.length ? `En prompt: ${injectedDirectives.join(' ')}` : 'Sin evidencia trazable.', directive: def.promptDirectives.join(' ') }; }),
             createdAt: (deps.now ?? (() => new Date().toISOString()))(), collection: 'draft'
           };

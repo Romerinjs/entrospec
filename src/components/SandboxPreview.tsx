@@ -21,6 +21,8 @@ export const SandboxPreview: React.FC<Props> = ({
   const [viewport, setViewport] = useState<ViewportMode>('desktop');
   const [activeTab, setActiveTab] = useState<PreviewTab>('preview');
   const [copied, setCopied] = useState(false);
+  const [savedCurated, setSavedCurated] = useState(false);
+  const [savedDraft, setSavedDraft] = useState(false);
 
   const widthClass =
     viewport === 'mobile'
@@ -132,20 +134,27 @@ export const SandboxPreview: React.FC<Props> = ({
 
           <button
             type="button"
-            onClick={onSaveDraft}
-            className="bg-[#222222] hover:bg-[#2C2C2C] px-3 py-1.5 text-xs text-[#A1A1A1] transition-colors"
+            onClick={async () => {
+              await onSaveDraft();
+              setSavedDraft(true);
+              setTimeout(() => setSavedDraft(false), 2000);
+            }}
+            className="bg-[#222222] hover:bg-[#2C2C2C] px-3 py-1.5 text-xs text-[#A1A1A1] hover:text-[#F3F3F3] transition-colors"
           >
-            Borrador
+            {savedDraft ? '✓ Borrador Guardado' : 'Borrador'}
           </button>
 
           <button
             type="button"
-            disabled={!bankDecision.eligible}
-            onClick={onSaveCurated}
-            title={bankDecision.reason}
-            className="bg-[#F3F3F3] hover:bg-white text-[#0A0A0A] px-3 py-1.5 text-xs font-semibold disabled:opacity-40 transition-colors"
+            onClick={async () => {
+              await onSaveCurated();
+              setSavedCurated(true);
+              setTimeout(() => setSavedCurated(false), 2000);
+            }}
+            title={bankDecision.eligible ? 'Guardar esta landing en el Banco Curado' : bankDecision.reason || 'Guardar en Banco'}
+            className="bg-[#F3F3F3] hover:bg-white text-[#0A0A0A] px-3 py-1.5 text-xs font-semibold transition-colors"
           >
-            Guardar en Banco
+            {savedCurated ? '✓ Guardado en Banco' : 'Guardar en Banco'}
           </button>
         </div>
       </div>

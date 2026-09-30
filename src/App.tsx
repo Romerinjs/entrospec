@@ -40,6 +40,14 @@ const initialTechniques: TechniqueItemView[] = TECHNIQUE_CATALOG.map(technique =
   directive: technique.promptDirectives.join(' '), riskMitigated: technique.auditRules.join(' '), enabled: technique.id !== 4
 }));
 
+const STYLE_SEED_PRESETS = [
+  'Swiss International × industrial engineering manual × warm editorial',
+  'Bauhaus × technical schematics × Colombian modernism',
+  'Art Deco × enterprise technology × 1930s machine-age advertising',
+  'Deconstructivist editorial × software architecture diagrams × raw typography',
+  'Retrofuturism × 1980s computer magazines × industrial documentation'
+] as const;
+
 function browserCodec() {
   return {
     compress: async ({ dataUrl }: { mimeType: string; dataUrl: string }) => {
@@ -127,6 +135,14 @@ export const App: React.FC = () => {
         cache: { get: repository.getVisualAsset.bind(repository), put: repository.putVisualAsset.bind(repository) },
         codec: browserCodec(),
         similarityThreshold: 0.82,
+        nativeSimilarityThreshold: Number.isFinite(Number(env.VITE_AI_NATIVE_SIMILARITY_THRESHOLD)) ? Number(env.VITE_AI_NATIVE_SIMILARITY_THRESHOLD) : 0.82,
+        nativeMaxAttempts: Number.isFinite(Number(env.VITE_AI_NATIVE_MAX_REGENERATIONS)) ? Math.max(0, Number(env.VITE_AI_NATIVE_MAX_REGENERATIONS)) : 2,
+        recentDocuments: async () => {
+          const [curated, drafts] = await Promise.all([repository.listCurated(), repository.listDrafts()]);
+          const unique = new Map<string, { id: string; htmlCode: string }>();
+          for (const item of [...drafts, ...curated, ...recentRecordsRef.current]) if (item.id && item.htmlCode) unique.set(item.id, { id: item.id, htmlCode: item.htmlCode });
+          return [...unique.values()].slice(-24);
+        },
         recentStructures: async () => {
           const curated = await repository.listCurated();
           return [...curated, ...recentRecordsRef.current].flatMap(item => {
@@ -435,14 +451,106 @@ export const App: React.FC = () => {
               <button type="button" onClick={() => void handleRun('procedural')} disabled={stage !== 'idle' && stage !== 'complete' && stage !== 'failed'} className="bg-[#1F1F1F] px-3 py-2 text-xs text-[#22C55E] disabled:opacity-40">Motor procedural local — sin Gemini</button>
             </div>
             <p className="w-full text-xs text-[#737373]">Entrospec diseña y compila localmente. No utiliza generación de texto IA.</p>
-            <div className="flex items-center gap-2 text-xs text-[#A1A1A1]">
-              Dirección artística
-              {(['auto', 'manual', 'experimental'] as const).map(mode => <button key={mode} type="button" onClick={() => { setStyleSeedMode(mode); if (mode === 'auto') setStyleSeed(''); }} aria-pressed={styleSeedMode === mode} className={`px-2 py-1 ${styleSeedMode === mode ? 'bg-[#282828] text-white' : 'bg-[#1F1F1F]'}`}>{mode === 'auto' ? 'Auto — derivar del brief' : mode === 'manual' ? 'Manual' : 'Experimental'}</button>)}
+            <div className="flex flex-wrap items-center gap-2 text-xs text-[#A1A1A1]">
+              <span>Dirección artística</span>
+              {(['auto', 'manual', 'experimental'] as const).map(mode => (
+                <button
+                  key={mode}
+                  type="button"
+                  onClick={() => {
+                    setStyleSeedMode(mode);
+                    if (mode === 'auto') setStyleSeed('');
+                  }}
+                  aria-pressed={styleSeedMode === mode}
+                  className={`px-2.5 py-1 text-xs transition-colors ${
+                    styleSeedMode === mode ? 'bg-[#282828] text-white font-medium' : 'bg-[#1F1F1F] text-[#8E8E8E] hover:text-[#D4D4D4]'
+                  }`}
+                >
+                  {mode === 'auto' ? 'Auto — derivar del brief' : mode === 'manual' ? 'Manual' : 'Experimental'}
+                </button>
+              ))}
             </div>
-            <label className="flex min-w-[260px] flex-1 flex-col gap-1 text-xs text-[#A1A1A1]">
-              {styleSeedMode === 'experimental' ? 'Semilla de estilo experimental' : 'Semilla de estilo manual'}
-              <input aria-label="Dirección artística" value={styleSeed} onChange={event => { setStyleSeed(event.target.value); setStyleSeedMode('manual'); }} disabled={styleSeedMode === 'auto'} placeholder="Auto — derivar del brief" className="bg-[#0A0A0A] px-3 py-2 text-sm text-[#F3F3F3] disabled:opacity-50" />
-            </label>
+
+            <div className="flex min-w-[320px] flex-1 flex-col gap-1.5 text-xs text-[#A1A1A1]">
+              <div className="flex items-center justify-between gap-2">
+                <label htmlFor="manual-style-seed-input" className="text-xs text-[#A1A1A1]">
+                  {styleSeedMode === 'experimental' ? 'Semilla de estilo experimental' : 'Semilla de estilo manual'}
+                </label>
+                {styleSeedMode !== 'auto' && (
+                  <select
+                    aria-label="Seleccionar preset de estilo"
+                    value={STYLE_SEED_PRESETS.includes(styleSeed as any) ? styleSeed : ''}
+                    onChange={e => {
+                      if (e.target.value) {
+                        setStyleSeed(e.target.value);
+                        setStyleSeedMode('manual');
+                      }
+                    }}
+                    className="bg-[#181818] border border-[#2E2E2E] text-[11px] text-[#A1A1A1] hover:text-[#F3F3F3] px-2 py-0.5 max-w-[210px] truncate"
+                  >
+                    <option value="">✦ Presets recomendados…</option>
+                    {STYLE_SEED_PRESETS.map((preset, idx) => (
+                      <option key={idx} value={preset}>
+                        {preset}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+
+              <input
+                id="manual-style-seed-input"
+                aria-label="Dirección artística"
+                list="style-seed-presets-list"
+                value={styleSeed}
+                onChange={event => {
+                  setStyleSeed(event.target.value);
+                  setStyleSeedMode('manual');
+                }}
+                disabled={styleSeedMode === 'auto'}
+                placeholder={
+                  styleSeedMode === 'auto'
+                    ? 'Auto — derivar del brief'
+                    : 'Escribe tu estilo o selecciona un preset (ej: Swiss International × warm editorial…)'
+                }
+                className="w-full bg-[#0A0A0A] border border-[#262626] focus:border-[#22C55E] px-3 py-2 text-xs font-mono text-[#F3F3F3] placeholder:text-[#555] disabled:opacity-50 transition-colors"
+              />
+              <datalist id="style-seed-presets-list">
+                {STYLE_SEED_PRESETS.map((preset, idx) => (
+                  <option key={idx} value={preset} />
+                ))}
+              </datalist>
+
+              {/* Chips de selección rápida de presets */}
+              {styleSeedMode !== 'auto' && (
+                <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                  <span className="text-[10px] mono text-[#666] uppercase tracking-wider">Presets rápidos:</span>
+                  {STYLE_SEED_PRESETS.map((preset, idx) => {
+                    const isSelected = styleSeed === preset;
+                    const shortName = preset.split(' × ')[0];
+                    return (
+                      <button
+                        key={idx}
+                        type="button"
+                        title={preset}
+                        onClick={() => {
+                          setStyleSeed(preset);
+                          setStyleSeedMode('manual');
+                        }}
+                        className={`px-2 py-0.5 text-[10px] mono transition-all border ${
+                          isSelected
+                            ? 'bg-[#22C55E]/15 border-[#22C55E] text-[#22C55E] font-semibold'
+                            : 'bg-[#141414] border-[#222222] text-[#8E8E8E] hover:text-[#F3F3F3] hover:border-[#383838]'
+                        }`}
+                      >
+                        {shortName}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
             <label className="flex min-w-[190px] flex-col gap-1 text-xs text-[#A1A1A1]">
               Novedad estructural · {noveltyBudget.toFixed(2)}
               <input aria-label="Novedad estructural" type="range" min="0" max="4" step="1" value={Math.round(noveltyBudget * 4)} onChange={event => setNoveltyBudget((Number(event.target.value) / 4) as 0 | 0.25 | 0.5 | 0.75 | 1)} />
@@ -499,6 +607,7 @@ export const App: React.FC = () => {
               for (const mode of ['ai_native_html', 'procedural'] as const) {
                 const next = await pipeline.run({ brief, executedPrompt: executionPrompt || prompt, ssotSeed: seed, activeTechniqueIds, imageMode: 'procedural', capabilities, visualReference: reference, executionMode: mode, allowFallback: false, architectureVersion: 2, styleSeed, noveltyBudget, creativeRisk });
                 both.push(next); setComparisonRecords([...both]);
+                recentRecordsRef.current = [...recentRecordsRef.current, next].slice(-50);
               }
             } catch (cause) {
               setError(cause instanceof Error ? cause.message : 'No fue posible completar la comparación.');

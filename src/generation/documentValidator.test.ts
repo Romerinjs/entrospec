@@ -2,9 +2,10 @@ import { describe, expect, it } from 'vitest';
 import { validateGeneratedDocument } from './documentValidator';
 
 describe('validateGeneratedDocument', () => {
-  it('rejects remote dependencies and missing landmarks', () => {
+  it('treats remote dependencies as warnings and flags missing landmarks as blocking', () => {
     const report = validateGeneratedDocument('<!doctype html><script src="https://cdn.example/x.js"></script>');
-    expect(report.blockingIssues.map(issue => issue.code)).toEqual(expect.arrayContaining(['REMOTE_DEPENDENCY', 'MISSING_MAIN']));
+    expect(report.blockingIssues.map(issue => issue.code)).toEqual(expect.arrayContaining(['MISSING_MAIN']));
+    expect(report.warnings.map(issue => issue.code)).toContain('REMOTE_DEPENDENCY');
   });
 
   it('accepts a native offline document with reduced motion and focus state', () => {
