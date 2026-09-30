@@ -39,7 +39,7 @@ export const PALETTES: ColorPalette[] = [
   {
     name: 'Grafito Mate & Amarillo Cromo',
     background: '#0D0D0D',
-    surface: '#171717',
+    surface: '#e8e4dc',
     accent: '#EAB308',
     textPrimary: '#FFFFFF',
     textSecondary: '#A3A3A3',

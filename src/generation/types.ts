@@ -103,9 +103,21 @@ export interface GeneratedVisualAsset {
   cacheHit?: boolean;
 }
 
+export type ExecutionMode = 'full' | 'seed_only' | 'image_only' | 'combined_techniques' | 'multi_prompt' | 'procedural' | 'ai_native_html';
+
+export interface TechniquePromptCandidate {
+  techniqueId: number;
+  variationId: 1 | 2 | 3;
+  techniqueTitle: string;
+  variationLabel: string;
+  angle: string;
+  prompt: string;
+}
+
 export interface GenerationCallEstimate {
-  textCalls: 1;
-  imageCalls: 0 | 1;
+  textCalls: number;
+  imageCalls: number;
+  totalCalls: number;
 }
 
 export interface GenerationRequest {
@@ -116,6 +128,13 @@ export interface GenerationRequest {
   imageMode: ImageMode;
   capabilities: string[];
   visualReference?: { dataUrl: string; mimeType: string };
+  executionMode?: ExecutionMode;
+  existingBlueprint?: LandingBlueprint;
+  allowFallback?: boolean;
+  architectureVersion?: 1 | 2;
+  styleSeed?: string;
+  noveltyBudget?: 0 | 0.25 | 0.5 | 0.75 | 1;
+  creativeRisk?: 'low' | 'moderate' | 'high';
 }
 
 export interface TechniqueEvidence {
@@ -144,13 +163,24 @@ export interface NoveltyAuditResult {
 }
 
 export interface GenerationRecord {
+  schemaVersion?: 1 | 2;
   id: string;
   request: GenerationRequest;
   blueprint: LandingBlueprint;
+  blueprintSource?: 'gemini' | 'procedural';
   htmlCode: string;
   visual: GeneratedVisualAsset;
   audit: NoveltyAuditResult;
   callsUsed: GenerationCallEstimate;
   createdAt: string;
   collection: 'draft' | 'curated';
+  blueprintV2?: import('../design/blueprintV2').BlueprintV2;
+  auditV2?: import('../audit/auditEngineV2').AuditV2Result;
+  structureFingerprint?: import('../diversity/structureFingerprint').StructureFingerprint;
+  engineVersion?: string;
+  grammarVersion?: string;
+  seedDerivation?: { styleSeed: string; entropySeed: string; compositionSeed?: string; seedVersion: string; subSeeds?: Record<string, string> };
+  compositionRepair?: { initialSimilarity: number; finalSimilarity: number; attempts: number; repaired: boolean };
+  requestDiagnostics?: { transmittedPrompt: string; rawModelText: string; extractedHtml: string; model: string; temperature: number; responseMimeType: string; executionMode: ExecutionMode };
+  techniqueTrace?: Array<{ id: number; technique: string; active: boolean; injected: boolean; audited: boolean; evidence: string; directive: string }>;
 }

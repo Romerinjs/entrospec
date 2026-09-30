@@ -3,13 +3,13 @@ import type { BrandBrief } from '../generation/types';
 
 interface Props { value: BrandBrief; onChange: (value: BrandBrief) => void; onReference?: (value: { dataUrl: string; mimeType: string } | undefined) => void }
 const fields: Array<[keyof BrandBrief, string, string]> = [
-  ['brandName', 'Nombre de marca', 'Cómo debe firmar la landing'],
-  ['industry', 'Sector', 'Industria o contexto'],
-  ['valueProposition', 'Propuesta de valor', 'Qué cambia para el usuario'],
-  ['targetAudience', 'Público objetivo', 'A quién debe convencer'],
-  ['brandPersonality', 'Personalidad', 'Sobria, experimental, técnica…'],
-  ['toneOfVoice', 'Tono de voz', 'Directo, cálido, preciso…'],
-  ['primaryAction', 'Acción principal', 'Qué debe ocurrir al pulsar el CTA']
+  ['brandName', 'Nombre de marca', 'Ej: Sabrosura del Mar, NovaTech, Arc...'],
+  ['industry', 'Sector / Industria', 'Ej: Gastronomía, Infraestructura, Fintech...'],
+  ['valueProposition', 'Propuesta de valor', 'Qué beneficio único y concreto ofreces al usuario'],
+  ['targetAudience', 'Público objetivo', 'A quién va dirigida la landing'],
+  ['brandPersonality', 'Personalidad', 'Ej: Cálida, técnica, sobria, audaz...'],
+  ['toneOfVoice', 'Tono de voz', 'Ej: Directo, cercano, editorial, persuasivo...'],
+  ['primaryAction', 'Acción principal (CTA)', 'Ej: Ver la carta, Solicitar demo, Empezar gratis...']
 ];
 
 export const BrandBriefForm: React.FC<Props> = ({ value, onChange, onReference }) => {

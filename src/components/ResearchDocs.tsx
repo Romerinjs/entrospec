@@ -51,7 +51,7 @@ export const ResearchDocs: React.FC = () => {
           </div>
 
           <div className="p-4 rounded-md bg-[#191919] flex flex-col gap-2">
-            <span className="text-xs font-semibold text-[#F3F3F3]">NoveltyBench (Distinct & Utility)</span>
+            <span className="text-xs font-semibold text-[#F3F3F3]">Internal Technique Score (Distinct & Utility)</span>
             <p className="text-xs text-[#A1A1A1] leading-relaxed">
               Evalúa que la originalidad visual (Distinctiveness) no degrade la usabilidad ni la conversión (Cumulative Utility), asegurando que la landing page no solo sea única sino altamente funcional.
             </p>

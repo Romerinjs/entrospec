@@ -1,5 +1,6 @@
 import type { GeneratedVisualAsset, GenerationRecord } from '../generation/types';
 import { openEntrospecDb, requestResult } from './entrospecDb';
+import { evaluateCuratedBankEligibility } from '../diversity/curatedBankGate';
 
 export interface ProjectRepository {
   saveDraft(record: GenerationRecord | Record<string, unknown>): Promise<void>;
@@ -17,7 +18,10 @@ function storageError(message: string): Error & { code: 'STORAGE_ERROR' } { cons
 export function createProjectRepository(options: { databaseName?: string } = {}): ProjectRepository {
   const dbPromise = openEntrospecDb(options.databaseName);
   const write = async (record: any, collection: 'draft' | 'curated') => {
-    if (collection === 'curated' && (!record.audit?.passesBank || Number(record.audit?.scores?.average || 0) < 8.5)) throw storageError('Solo se admiten landings con auditoría mínima de 8.5.');
+    if (collection === 'curated') {
+      const decision = evaluateCuratedBankEligibility(record);
+      if (!decision.eligible) throw storageError(decision.reason || 'La landing no cumple los criterios de admisión.');
+    }
     try { const db = await dbPromise; const tx = db.transaction('projects', 'readwrite'); tx.objectStore('projects').put({ ...record, collection }); await new Promise<void>((resolve, reject) => { tx.oncomplete = () => resolve(); tx.onerror = () => reject(tx.error); }); } catch (cause) { throw storageError(cause instanceof Error ? cause.message : 'No se pudo guardar el proyecto.'); }
   };
   const list = async (collection: 'draft' | 'curated') => { const db = await dbPromise; const tx = db.transaction('projects', 'readonly'); return requestResult<any[]>(tx.objectStore('projects').index('collection').getAll(collection)); };

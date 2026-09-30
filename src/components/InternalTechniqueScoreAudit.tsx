@@ -1,13 +1,13 @@
 import React from 'react';
 import { NoveltyAuditResult } from '../types';
 
-interface NoveltyBenchAuditProps {
+interface InternalTechniqueScoreAuditProps {
   audit: NoveltyAuditResult;
   onRefactor: () => void;
   isRefactoring: boolean;
 }
 
-export const NoveltyBenchAudit: React.FC<NoveltyBenchAuditProps> = ({
+export const InternalTechniqueScoreAudit: React.FC<InternalTechniqueScoreAuditProps> = ({
   audit,
   onRefactor,
   isRefactoring
@@ -20,7 +20,7 @@ export const NoveltyBenchAudit: React.FC<NoveltyBenchAuditProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex flex-col gap-1">
           <span className="mono text-[11px] uppercase tracking-widest text-[#737373]">
-            AUDITORÍA NOVELTYBENCH // CREATOR-CRITIC
+            INTERNAL TECHNIQUE SCORE // CREATOR-CRITIC
           </span>
           <div className="flex items-center gap-3">
             <h2 className="text-xl font-bold tracking-tight text-[#F3F3F3]">

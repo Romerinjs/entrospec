@@ -1,0 +1,49 @@
+{
+  "strategy": {
+    "brandName": "Northline",
+    "industry": "Infraestructura técnica",
+    "audience": "Equipos de producto y arquitectura",
+    "promise": "Decisiones operativas más claras, con evidencia que se puede leer.",
+    "objective": "Explicar el mecanismo, probar confiabilidad y facilitar el siguiente paso.",
+    "claims": []
+  },
+  "artDirection": {
+    "compositionGrammar": "swiss",
+    "surfaceLanguage": "flat",
+    "artDirection": "scientific",
+    "ornamentation": "patent-illustration",
+    "density": "restrained",
+    "motionLanguage": "editorial",
+    "styleSeed": "Swiss × scientific atlas",
+    "rationale": "Retícula precisa, anotaciones de evidencia y ritmo editorial con espacios direccionales."
+  },
+  "contentArchitecture": {
+    "objective": "Aclarar decisiones operativas con evidencia legible.",
+    "readingLogic": ["opening", "mechanism", "evidence", "objections", "action"],
+    "nodes": [
+      { "id": "opening", "purpose": "introduce", "blocks": [{ "id": "opening-title", "kind": "headline", "text": "La operación, a la vista.", "priority": 1 }, { "id": "opening-copy", "kind": "paragraph", "text": "Una lectura más clara para equipos que necesitan decidir con evidencia.", "priority": 2 }], "dependsOn": [], "priority": 10, "copyIntensity": "manifesto" },
+      { "id": "mechanism", "purpose": "demonstrate", "blocks": [{ "id": "mechanism-label", "kind": "label", "text": "MECANISMO", "priority": 1 }, { "id": "mechanism-copy", "kind": "paragraph", "text": "Conecta señales operativas con decisiones verificables.", "priority": 2 }], "dependsOn": ["opening"], "priority": 7, "copyIntensity": "editorial" },
+      { "id": "evidence", "purpose": "prove", "blocks": [{ "id": "evidence-quote", "kind": "quote", "text": "La evidencia debe poder leerse antes de convertirse en una decisión.", "priority": 1 }], "dependsOn": ["mechanism"], "priority": 8, "copyIntensity": "compact" },
+      { "id": "objections", "purpose": "objection", "blocks": [{ "id": "objection-question", "kind": "question", "text": "¿Cómo se mantiene el contexto entre equipos?", "priority": 1 }, { "id": "objection-answer", "kind": "answer", "text": "Cada señal conserva el contexto que permite revisarla.", "priority": 2 }], "dependsOn": ["evidence"], "priority": 5, "copyIntensity": "compact" },
+      { "id": "action", "purpose": "convert", "blocks": [{ "id": "action-copy", "kind": "paragraph", "text": "Empieza por la decisión que hoy cuesta explicar.", "priority": 1 }, { "id": "action-cta", "kind": "cta", "text": "Ver cómo funciona", "label": "Ver cómo funciona", "href": "#top", "priority": 1 }], "dependsOn": ["evidence"], "priority": 10, "copyIntensity": "micro" }
+    ],
+    "requiredClaims": [],
+    "primaryAction": { "label": "Ver cómo funciona", "href": "#top" }
+  },
+  "visualStrategy": {
+    "mode": "annotated-diagram",
+    "prompt": "Un diagrama editorial científico que representa señales operativas como líneas y anotaciones legibles, sin texto incrustado.",
+    "alt": "Diagrama abstracto de señales operativas y relaciones verificables.",
+    "placement": "proof-field",
+    "mediaSequence": ["annotated-diagram"]
+  },
+  "visualTokens": {
+    "background": "#0A0A0A",
+    "surface": "#141414",
+    "accent": "#22C55E",
+    "foreground": "#F3F3F3",
+    "muted": "#A1A1A1",
+    "displayFont": "system-ui",
+    "bodyFont": "system-ui"
+  }
+}

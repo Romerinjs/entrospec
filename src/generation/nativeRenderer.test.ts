@@ -40,4 +40,65 @@ describe('renderLandingDocument', () => {
     expect(html).not.toContain('<script>window.pwned=true</script>');
     expect(html).toContain('&lt;/title&gt;');
   });
+
+  it('renders different layout archetypes based on blueprint style', () => {
+    const monumentalHtml = renderLandingDocument({
+      ...input,
+      blueprint: { ...blueprint, layout: { ...blueprint.layout, style: 'centered_monumental' } }
+    });
+    expect(monumentalHtml).toContain('archetype-layout-centered_monumental');
+
+    const terminalHtml = renderLandingDocument({
+      ...input,
+      blueprint: { ...blueprint, layout: { ...blueprint.layout, style: 'terminal_tech' } }
+    });
+    expect(terminalHtml).toContain('archetype-layout-terminal_tech');
+
+    const luxuryHtml = renderLandingDocument({
+      ...input,
+      blueprint: { ...blueprint, layout: { ...blueprint.layout, style: 'luxury_magazine' } }
+    });
+    expect(luxuryHtml).toContain('archetype-layout-luxury_magazine');
+  });
+
+  it('specializes section layouts for features, metrics proof, and faq accordion', () => {
+    const richBlueprint = {
+      ...blueprint,
+      sections: [
+        { id: 'hero', type: 'hero', heading: 'Plataforma Cuántica', body: 'Precisión absoluta.' },
+        {
+          id: 'features',
+          type: 'feature',
+          heading: 'Capacidades Centrales',
+          body: 'Diseñado para alta concurrencia.',
+          items: [{ heading: 'Criptografía', body: 'Aislamiento en hardware.' }]
+        },
+        {
+          id: 'proof',
+          type: 'proof',
+          heading: 'Rendimiento Verificado',
+          body: 'Métricas auditadas.',
+          items: [{ heading: '99.99%', body: 'Disponibilidad garantizada.' }]
+        },
+        {
+          id: 'faq',
+          type: 'faq',
+          heading: 'Preguntas Frecuentes',
+          body: 'Respuestas directas a dudas operativas.',
+          items: [{ heading: '¿Cómo se integra?', body: 'Con una llamada directa sin librerías.' }]
+        },
+        { id: 'cta', type: 'cta', heading: 'Comienza hoy', body: 'Despliegue inmediato.', ctaLabel: 'Iniciar', ctaAction: '#signup' }
+      ]
+    };
+
+    const html = renderLandingDocument({ ...input, blueprint: richBlueprint });
+    expect(html).toContain('feature-grid');
+    expect(html).toContain('feature-index');
+    expect(html).toContain('metrics-grid');
+    expect(html).toContain('metric-value');
+    expect(html).toContain('faq-accordion');
+    expect(html).toContain('<details class="faq-item"');
+    expect(html).toContain('section-cta-banner');
+  });
 });
+

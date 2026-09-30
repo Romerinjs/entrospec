@@ -5,12 +5,20 @@ interface HeaderProps {
   activeTab: ActiveTab;
   setActiveTab: (tab: ActiveTab) => void;
   bankCount: number;
+  apiStatus?: {
+    hasKey: boolean;
+    testing?: boolean;
+    lastResult?: { ok: boolean; latencyMs?: number; textModel?: string; error?: string };
+  };
+  onTestApi?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   activeTab,
   setActiveTab,
-  bankCount
+  bankCount,
+  apiStatus,
+  onTestApi
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -111,40 +119,68 @@ export const Header: React.FC<HeaderProps> = ({
           </span>
         </div>
 
-        <nav className="flex flex-wrap gap-2">
-          <button
-            onClick={() => setActiveTab('studio')}
-            className={`px-4 py-2 text-xs transition-colors ${
-              activeTab === 'studio'
-                ? 'bg-[#282828] text-[#F3F3F3]'
-                : 'bg-[#141414] text-[#737373] hover:bg-[#1F1F1F] hover:text-[#A1A1A1]'
-            }`}
-          >
-            Studio
-          </button>
+        <div className="flex flex-wrap items-center gap-4">
+          {/* Diagnóstico de API de Gemini */}
+          {apiStatus && (
+            <div className="flex items-center gap-2 bg-[#141414] px-3 py-1.5 text-xs">
+              <span className={`w-2 h-2 rounded-full ${apiStatus.hasKey ? 'bg-[#22C55E]' : 'bg-[#E06D53]'}`} />
+              <span className="mono text-[11px] text-[#A1A1A1]">
+                {apiStatus.hasKey ? 'API Key activa' : 'Sin API Key'}
+              </span>
+              {apiStatus.lastResult && (
+                <span className={`mono text-[10px] ${apiStatus.lastResult.ok ? 'text-[#22C55E]' : 'text-[#E06D53]'}`}>
+                  {apiStatus.lastResult.ok ? `${apiStatus.lastResult.latencyMs}ms` : 'Error'}
+                </span>
+              )}
+              {onTestApi && (
+                <button
+                  type="button"
+                  onClick={onTestApi}
+                  disabled={apiStatus.testing}
+                  className="mono text-[10px] uppercase bg-[#1F1F1F] hover:bg-[#282828] text-[#F3F3F3] px-2 py-0.5 transition-colors disabled:opacity-50"
+                  title="Verificar conexión en vivo con Gemini API"
+                >
+                  {apiStatus.testing ? 'Probando...' : 'Probar API'}
+                </button>
+              )}
+            </div>
+          )}
 
-          <button
-            onClick={() => setActiveTab('bank')}
-            className={`px-4 py-2 text-xs transition-colors ${
-              activeTab === 'bank'
-                ? 'bg-[#282828] text-[#F3F3F3]'
-                : 'bg-[#141414] text-[#737373] hover:bg-[#1F1F1F] hover:text-[#A1A1A1]'
-            }`}
-          >
-            Banco ({bankCount})
-          </button>
+          <nav className="flex flex-wrap gap-2">
+            <button
+              onClick={() => setActiveTab('studio')}
+              className={`px-4 py-2 text-xs transition-colors ${
+                activeTab === 'studio'
+                  ? 'bg-[#282828] text-[#F3F3F3]'
+                  : 'bg-[#141414] text-[#737373] hover:bg-[#1F1F1F] hover:text-[#A1A1A1]'
+              }`}
+            >
+              Studio
+            </button>
 
-          <button
-            onClick={() => setActiveTab('architecture')}
-            className={`px-4 py-2 text-xs transition-colors ${
-              activeTab === 'architecture'
-                ? 'bg-[#282828] text-[#F3F3F3]'
-                : 'bg-[#141414] text-[#737373] hover:bg-[#1F1F1F] hover:text-[#A1A1A1]'
-            }`}
-          >
-            Investigación
-          </button>
-        </nav>
+            <button
+              onClick={() => setActiveTab('bank')}
+              className={`px-4 py-2 text-xs transition-colors ${
+                activeTab === 'bank'
+                  ? 'bg-[#282828] text-[#F3F3F3]'
+                  : 'bg-[#141414] text-[#737373] hover:bg-[#1F1F1F] hover:text-[#A1A1A1]'
+              }`}
+            >
+              Banco ({bankCount})
+            </button>
+
+            <button
+              onClick={() => setActiveTab('architecture')}
+              className={`px-4 py-2 text-xs transition-colors ${
+                activeTab === 'architecture'
+                  ? 'bg-[#282828] text-[#F3F3F3]'
+                  : 'bg-[#141414] text-[#737373] hover:bg-[#1F1F1F] hover:text-[#A1A1A1]'
+              }`}
+            >
+              Investigación
+            </button>
+          </nav>
+        </div>
       </div>
     </header>
   );
